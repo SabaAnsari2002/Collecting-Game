@@ -6,22 +6,29 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.CollectingGame"
         tools:targetApi="31">
+
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.CollectingGame">
+            android:name=".SplashActivity"
+            android:exported="true"> <!-- این خط اضافه شده است -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true" /> <!-- این خط اضافه شده است -->
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" /> <!-- اگر این activity فقط درون اپلیکیشن شما استفاده می‌شود، می‌تواند false باشد -->
     </application>
 
 </manifest>
