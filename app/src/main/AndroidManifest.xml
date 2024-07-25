@@ -15,7 +15,7 @@
 
         <activity
             android:name=".SplashActivity"
-            android:exported="true"> <!-- این خط اضافه شده است -->
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,11 +24,16 @@
 
         <activity
             android:name=".HomeActivity"
-            android:exported="true" /> <!-- این خط اضافه شده است -->
+            android:exported="true" />
 
         <activity
             android:name=".MainActivity"
-            android:exported="false" /> <!-- اگر این activity فقط درون اپلیکیشن شما استفاده می‌شود، می‌تواند false باشد -->
+            android:exported="false" />
+
+        <activity
+            android:name=".GameOverActivity"
+            android:exported="true" /> <!-- افزودن GameOverActivity به فایل manifest -->
+
     </application>
 
 </manifest>

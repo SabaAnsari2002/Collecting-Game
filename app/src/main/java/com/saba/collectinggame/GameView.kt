@@ -1,6 +1,7 @@
 package com.saba.collectinggame
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
@@ -34,6 +35,10 @@ class GameView(context: Context) : View(context) {
     private val bucketScaleFactor = 0.4f // Increase size of the bucket
     private val iceCreamScaleFactor = 0.4f // Decrease size of the ice creams
 
+    // Variables for score and missed ice creams
+    private var score = 0
+    private var missed = 0
+
     init {
         val displayMetrics = context.resources.displayMetrics
         bucketBitmap = Bitmap.createScaledBitmap(
@@ -52,6 +57,20 @@ class GameView(context: Context) : View(context) {
         // Draw bucket
         canvas.drawBitmap(bucketBitmap, bucketX, bucketY, paint)
 
+        // Draw score and missed
+        paint.textSize = 50f
+        canvas.drawText("Score: $score", 50f, 100f, paint)
+        canvas.drawText("Missed: $missed", 50f, 200f, paint)
+
+        // Check if game over
+        if (missed >= 5) {
+            val intent = Intent(context, GameOverActivity::class.java).apply {
+                putExtra("score", score)
+            }
+            context.startActivity(intent)
+            return
+        }
+
         // Spawn ice cream
         if (System.currentTimeMillis() - lastDropTime > 1000) {
             spawnIceCream()
@@ -65,10 +84,12 @@ class GameView(context: Context) : View(context) {
             iceCream.y += 10
             if (iceCream.y > height) {
                 iterator.remove()
+                missed++
             } else {
                 canvas.drawBitmap(iceCream.bitmap, iceCream.x, iceCream.y, paint)
                 if (iceCream.x in bucketX..(bucketX + bucketBitmap.width) && iceCream.y in bucketY..(bucketY + bucketBitmap.height)) {
                     iterator.remove()
+                    score++
                 }
             }
         }
