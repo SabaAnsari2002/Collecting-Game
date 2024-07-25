@@ -17,12 +17,12 @@
         android:id="@+id/start_button"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/home_icon"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_start"
+        android:fontFamily="@font/paytone"
         android:text="Start"
         android:textColor="#000000"
-        android:textSize="30sp"
-    android:fontFamily="@font/paytone"
-    android:background="@drawable/button_background"
-    android:layout_centerInParent="true"
-    android:layout_below="@id/home_icon"
-    android:layout_marginTop="40dp"/>
+        android:textSize="30sp" />
 </RelativeLayout>
