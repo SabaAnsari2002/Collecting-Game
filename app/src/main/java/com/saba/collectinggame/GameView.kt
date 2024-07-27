@@ -22,7 +22,9 @@ class GameView(context: Context) : View(context) {
         BitmapFactory.decodeResource(resources, R.drawable.ice_cream5),
         BitmapFactory.decodeResource(resources, R.drawable.ice_cream6),
         BitmapFactory.decodeResource(resources, R.drawable.ice_cream7),
-        BitmapFactory.decodeResource(resources, R.drawable.ice_cream8)
+        BitmapFactory.decodeResource(resources, R.drawable.ice_cream8),
+        BitmapFactory.decodeResource(resources, R.drawable.ice_cream9)
+
     )
     private var bucketBitmap: Bitmap
     private var bucketX = 0f
