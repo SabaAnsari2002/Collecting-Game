@@ -5,13 +5,15 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
-import android.util.DisplayMetrics
+import android.os.Handler
+import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import java.util.*
 
-class GameView(context: Context) : View(context) {
+class GameView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
     private val paint = Paint()
     private val originalBucketBitmap = BitmapFactory.decodeResource(resources, R.drawable.bucket)
     private val iceCreamBitmaps = listOf(
@@ -50,6 +52,15 @@ class GameView(context: Context) : View(context) {
     private var spawnInterval = 500L // Initial spawn interval in milliseconds
     private val minSpawnInterval = 200L // Minimum spawn interval in milliseconds
 
+    // SharedPreferences for high score
+    private val prefs = context.getSharedPreferences("game_prefs", Context.MODE_PRIVATE)
+    private var highScore = prefs.getInt("high_score", 0)
+
+    // Variables for new record message
+    private var newRecordFlag = false // Flag to indicate if new record is set
+    private var showNewRecordMessage = false // Flag to show new record message
+    private var newRecordShown = false // Ensure the message is shown only once
+
     init {
         val displayMetrics = context.resources.displayMetrics
         bucketBitmap = Bitmap.createScaledBitmap(
@@ -68,18 +79,46 @@ class GameView(context: Context) : View(context) {
         // Draw bucket
         canvas.drawBitmap(bucketBitmap, bucketX, bucketY, paint)
 
-        // Draw score and missed
+        // Draw score, missed and high score
         paint.textSize = 50f
         canvas.drawText("Score: $score", 50f, 100f, paint)
         canvas.drawText("Missed: $missed", 50f, 200f, paint)
+        canvas.drawText("High Score: $highScore", 50f, 300f, paint)
+
+        // Draw new record message if needed
+        if (showNewRecordMessage) {
+            paint.color = Color.RED
+            canvas.drawText("New Record!", 50f, 400f, paint)
+            paint.color = Color.BLACK // Reset color to default
+        }
 
         // Check if game over
         if (missed >= 5) {
+            if (score > highScore) {
+                highScore = score
+                prefs.edit().putInt("high_score", highScore).apply()
+            }
             val intent = Intent(context, GameOverActivity::class.java).apply {
                 putExtra("score", score)
+                putExtra("high_score", highScore)
             }
             context.startActivity(intent)
             return
+        }
+
+        // Update high score and show new record message
+        if (score > highScore && !newRecordFlag) {
+            highScore = score
+            prefs.edit().putInt("high_score", highScore).apply()
+            newRecordFlag = true
+            if (!newRecordShown) {
+                showNewRecordMessage = true
+                newRecordShown = true
+                Handler().postDelayed({
+                    showNewRecordMessage = false
+                    invalidate() // Redraw to hide the message
+                }, 1000) // Display message for 1 second
+            }
         }
 
         // Update falling speed
