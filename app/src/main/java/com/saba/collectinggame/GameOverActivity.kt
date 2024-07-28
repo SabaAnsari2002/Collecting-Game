@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
+
 class GameOverActivity : AppCompatActivity() {
     private lateinit var gameOverMusic: MediaPlayer
 
@@ -19,9 +20,13 @@ class GameOverActivity : AppCompatActivity() {
         gameOverMusic.start()
 
         val score = intent.getIntExtra("score", 0)
+        val highScore = intent.getIntExtra("high_score", 0)
 
         val scoreTextView: TextView = findViewById(R.id.score_text_view)
         scoreTextView.text = "Score: $score"
+
+        val highScoreTextView: TextView = findViewById(R.id.high_score_text_view)
+        highScoreTextView.text = "High Score: $highScore"
 
         val restartButton: Button = findViewById(R.id.restart_button)
 
