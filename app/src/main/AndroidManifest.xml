@@ -32,8 +32,11 @@
 
         <activity
             android:name=".GameOverActivity"
-            android:exported="true" /> <!-- افزودن GameOverActivity به فایل manifest -->
+            android:exported="true" />
 
+        <activity
+            android:name=".WinActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

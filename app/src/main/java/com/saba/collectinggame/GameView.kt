@@ -94,14 +94,17 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
         // Check if game over
         if (missed >= 5) {
+            val intent = if (score > highScore) {
+                Intent(context, WinActivity::class.java)
+            } else {
+                Intent(context, GameOverActivity::class.java)
+            }
             if (score > highScore) {
                 highScore = score
                 prefs.edit().putInt("high_score", highScore).apply()
             }
-            val intent = Intent(context, GameOverActivity::class.java).apply {
-                putExtra("score", score)
-                putExtra("high_score", highScore)
-            }
+            intent.putExtra("score", score)
+            intent.putExtra("high_score", highScore)
             context.startActivity(intent)
             return
         }

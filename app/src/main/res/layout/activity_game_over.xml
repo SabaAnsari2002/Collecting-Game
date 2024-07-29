@@ -56,7 +56,7 @@
         android:textSize="35sp"
         android:enabled="false"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button_restart"
+        android:background="@drawable/button_restart1"
         android:textColor="#362315"
         android:fontFamily="@font/paytone"/>
 </RelativeLayout>
