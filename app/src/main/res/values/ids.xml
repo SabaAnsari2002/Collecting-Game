@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="toggle_sound_button" type="id" />
+    <item name="restart_game_button" type="id" />
+    <item name="resume_game_button" type="id" />
+    <item name="ok_button" type="id" />
+</resources>

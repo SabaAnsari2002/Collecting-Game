@@ -37,6 +37,9 @@
         <activity
             android:name=".WinActivity"
             android:exported="true" />
+        <activity
+            android:name=".ThemeSelectionActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

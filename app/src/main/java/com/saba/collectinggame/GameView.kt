@@ -15,18 +15,6 @@ import java.util.*
 
 class GameView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
     private val paint = Paint()
-    private val originalBucketBitmap = BitmapFactory.decodeResource(resources, R.drawable.bucket)
-    private val iceCreamBitmaps = listOf(
-        BitmapFactory.decodeResource(resources, R.drawable.ice_cream1),
-        BitmapFactory.decodeResource(resources, R.drawable.ice_cream2),
-        BitmapFactory.decodeResource(resources, R.drawable.ice_cream3),
-        BitmapFactory.decodeResource(resources, R.drawable.ice_cream4),
-        BitmapFactory.decodeResource(resources, R.drawable.ice_cream5),
-        BitmapFactory.decodeResource(resources, R.drawable.ice_cream6),
-        BitmapFactory.decodeResource(resources, R.drawable.ice_cream7),
-        BitmapFactory.decodeResource(resources, R.drawable.ice_cream8),
-        BitmapFactory.decodeResource(resources, R.drawable.ice_cream9)
-    )
     private var bucketBitmap: Bitmap
     private var bucketX = 0f
     private var bucketY = 0f
@@ -37,8 +25,12 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private var lastIntervalUpdateTime = System.currentTimeMillis()
 
     // Scaling factors for bucket and ice creams
-    private val bucketScaleFactor = 0.4f
+    private val defaultBucketScaleFactor = 0.4f
+    private val donutBucketScaleFactor = 0.2f
+    private val cappuccinoBucketScaleFactor = 0.2f
     private val iceCreamScaleFactor = 0.4f
+    private val donutScaleFactor = 0.1f
+    private val cappuccinoScaleFactor = 0.1f
 
     // Variables for score and missed ice creams
     private var score = 0
@@ -52,25 +44,26 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private var spawnInterval = 500L // Initial spawn interval in milliseconds
     private val minSpawnInterval = 200L // Minimum spawn interval in milliseconds
 
-    // SharedPreferences for high score
+    // SharedPreferences for high score and theme
     private val prefs = context.getSharedPreferences("game_prefs", Context.MODE_PRIVATE)
     private var highScore = prefs.getInt("high_score", 0)
+    private val selectedTheme = prefs.getString("selected_theme", "default")
 
     // Variables for new record message
     private var newRecordFlag = false // Flag to indicate if new record is set
     private var showNewRecordMessage = false // Flag to show new record message
     private var newRecordShown = false // Ensure the message is shown only once
 
+    // Bitmaps for ice creams
+    private val iceCreamBitmaps: List<Bitmap>
+
     init {
         val displayMetrics = context.resources.displayMetrics
-        bucketBitmap = Bitmap.createScaledBitmap(
-            originalBucketBitmap,
-            (originalBucketBitmap.width * bucketScaleFactor).toInt(),
-            (originalBucketBitmap.height * bucketScaleFactor).toInt(),
-            true
-        )
+        bucketBitmap = getBucketBitmapForTheme(selectedTheme)
+        bucketBitmap = Bitmap.createScaledBitmap(bucketBitmap, (bucketBitmap.width * getBucketScaleFactorForTheme(selectedTheme)).toInt(), (bucketBitmap.height * getBucketScaleFactorForTheme(selectedTheme)).toInt(), true)
         bucketX = (displayMetrics.widthPixels / 2 - bucketBitmap.width / 2).toFloat()
         bucketY = (displayMetrics.heightPixels - bucketBitmap.height - 50).toFloat()
+        iceCreamBitmaps = getIceCreamBitmapsForTheme(selectedTheme)
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -173,7 +166,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
     private fun spawnIceCream() {
         val bitmap = iceCreamBitmaps[random.nextInt(iceCreamBitmaps.size)]
-        val scaledBitmap = Bitmap.createScaledBitmap(bitmap, (bitmap.width * iceCreamScaleFactor).toInt(), (bitmap.height * iceCreamScaleFactor).toInt(), true)
+        val scaledBitmap = Bitmap.createScaledBitmap(bitmap, (bitmap.width * getIceCreamScaleFactorForTheme(selectedTheme)).toInt(), (bitmap.height * getIceCreamScaleFactorForTheme(selectedTheme)).toInt(), true)
         val x = random.nextInt(width - scaledBitmap.width)
         val y = 0f
         iceCreams.add(IceCream(x.toFloat(), y, scaledBitmap))
@@ -184,6 +177,62 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             bucketX = event.x - bucketBitmap.width / 2
         }
         return true
+    }
+
+    private fun getBucketBitmapForTheme(theme: String?): Bitmap {
+        return when (theme) {
+            "donut" -> BitmapFactory.decodeResource(resources, R.drawable.donut_bucket)
+            "cappuccino" -> BitmapFactory.decodeResource(resources, R.drawable.cappuccino_bucket)
+            else -> BitmapFactory.decodeResource(resources, R.drawable.bucket)
+        }
+    }
+
+    private fun getBucketScaleFactorForTheme(theme: String?): Float {
+        return when (theme) {
+            "donut" -> donutBucketScaleFactor
+            "cappuccino" -> cappuccinoBucketScaleFactor
+            else -> defaultBucketScaleFactor
+        }
+    }
+
+    private fun getIceCreamScaleFactorForTheme(theme: String?): Float {
+        return when (theme) {
+            "donut" -> donutScaleFactor
+            "cappuccino" -> cappuccinoScaleFactor
+            else -> iceCreamScaleFactor
+        }
+    }
+
+    private fun getIceCreamBitmapsForTheme(theme: String?): List<Bitmap> {
+        return when (theme) {
+            "donut" -> listOf(
+                BitmapFactory.decodeResource(resources, R.drawable.donut1),
+                BitmapFactory.decodeResource(resources, R.drawable.donut2),
+                BitmapFactory.decodeResource(resources, R.drawable.donut3),
+                BitmapFactory.decodeResource(resources, R.drawable.donut4),
+                BitmapFactory.decodeResource(resources, R.drawable.donut5),
+                BitmapFactory.decodeResource(resources, R.drawable.donut6)
+            )
+            "cappuccino" -> listOf(
+                BitmapFactory.decodeResource(resources, R.drawable.cappuccino1),
+                BitmapFactory.decodeResource(resources, R.drawable.cappuccino2),
+                BitmapFactory.decodeResource(resources, R.drawable.cappuccino3),
+                BitmapFactory.decodeResource(resources, R.drawable.cappuccino4),
+                BitmapFactory.decodeResource(resources, R.drawable.cappuccino5),
+                BitmapFactory.decodeResource(resources, R.drawable.cappuccino6)
+            )
+            else -> listOf(
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream1),
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream2),
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream3),
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream4),
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream5),
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream6),
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream7),
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream8),
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream9)
+                )
+        }
     }
 
     data class IceCream(var x: Float, var y: Float, var bitmap: Bitmap, var rotation: Float = 0f)

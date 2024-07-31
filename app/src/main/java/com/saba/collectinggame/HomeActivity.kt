@@ -15,5 +15,11 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        val themeButton: Button = findViewById(R.id.theme_button)
+        themeButton.setOnClickListener {
+            val intent = Intent(this, ThemeSelectionActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
