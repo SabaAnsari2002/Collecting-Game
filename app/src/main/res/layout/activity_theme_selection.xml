@@ -8,46 +8,166 @@
         android:id="@+id/theme_selection_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Theme"
+        android:text="Theme"
         android:textSize="30sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/paytone"
         android:textColor="#000000" />
 
-    <Button
-        android:id="@+id/default_theme_button"
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:id="@+id/theme_grid"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Default"
         android:layout_below="@id/theme_selection_text"
         android:layout_marginTop="30dp"
+        android:columnCount="3"
+        android:rowCount="3"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/paytone"
-        android:textColor="#000000"
-        android:background="@drawable/button_start" />
+        android:layout_marginBottom="30dp">
 
-    <Button
-        android:id="@+id/donut_theme_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Donut"
-        android:layout_below="@id/default_theme_button"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/paytone"
-        android:textColor="#000000"
-        android:background="@drawable/button_start" />
+        <!-- Ice Cream Theme -->
+        <LinearLayout
+            android:id="@+id/ice_cream_theme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center">
 
-    <Button
-        android:id="@+id/cappuccino_theme_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cappuccino"
-        android:layout_below="@id/donut_theme_button"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/paytone"
-        android:textColor="#000000"
-        android:background="@drawable/button_start" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ice_cream6"
+                android:contentDescription="Ice Cream Theme" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ice cream"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#000000"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <!-- Coffee Theme -->
+        <LinearLayout
+            android:id="@+id/coffee_theme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/coffee10"
+                android:contentDescription="Coffee Theme" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="coffee"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#000000"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <!-- Donut Theme -->
+        <LinearLayout
+            android:id="@+id/donut_theme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/donut6"
+                android:contentDescription="Donut Theme" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="donut"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#000000"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <!-- Fast Food Theme -->
+        <LinearLayout
+            android:id="@+id/fast_food_theme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/fastfood8"
+                android:contentDescription="Fast Food Theme" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fast food"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#000000"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <!-- Fruit Theme -->
+        <LinearLayout
+            android:id="@+id/fruit_theme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/fruit1"
+                android:contentDescription="Fruit Theme" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fruit"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#000000"
+                android:gravity="center"/>
+        </LinearLayout>
+
+
+
+
+    </GridLayout>
 </RelativeLayout>
