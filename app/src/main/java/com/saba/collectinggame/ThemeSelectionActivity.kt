@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.Button
+import android.widget.LinearLayout
 
 class ThemeSelectionActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -12,21 +12,19 @@ class ThemeSelectionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_theme_selection)
 
-        val defaultThemeButton: Button = findViewById(R.id.default_theme_button)
-        val donutThemeButton: Button = findViewById(R.id.donut_theme_button)
-        val cappuccinoThemeButton: Button = findViewById(R.id.cappuccino_theme_button)
+        val iceCreamTheme: LinearLayout = findViewById(R.id.ice_cream_theme)
+        val coffeeTheme: LinearLayout = findViewById(R.id.coffee_theme)
+        val donutTheme: LinearLayout = findViewById(R.id.donut_theme)
+        val fastFoodTheme: LinearLayout = findViewById(R.id.fast_food_theme)
+        val fruitTheme: LinearLayout = findViewById(R.id.fruit_theme)
 
-        defaultThemeButton.setOnClickListener {
-            setTheme("default")
-        }
 
-        donutThemeButton.setOnClickListener {
-            setTheme("donut")
-        }
+        iceCreamTheme.setOnClickListener { setTheme("ice_cream") }
+        coffeeTheme.setOnClickListener { setTheme("coffee") }
+        donutTheme.setOnClickListener { setTheme("donut") }
+        fastFoodTheme.setOnClickListener { setTheme("fast_food") }
+        fruitTheme.setOnClickListener { setTheme("fruit") }
 
-        cappuccinoThemeButton.setOnClickListener {
-            setTheme("cappuccino")
-        }
     }
 
     private fun setTheme(theme: String) {
