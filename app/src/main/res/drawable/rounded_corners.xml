@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FF20AFC1"/> <!-- رنگ نارنجی -->
+    <corners android:radius="26dp"/> <!-- شعاع گوشه‌های گرد -->
+</shape>
