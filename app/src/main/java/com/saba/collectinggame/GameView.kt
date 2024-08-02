@@ -26,12 +26,12 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
     // Scaling factors for bucket and ice creams
     private val defaultBucketScaleFactor = 0.4f
-    private val donutBucketScaleFactor = 0.18f
+    private val donutBucketScaleFactor = 0.19f
     private val coffeeBucketScaleFactor = 0.18f
     private val fruitBucketScaleFactor = 0.18f
-    private val fastfoodBucketScaleFactor = 0.18f
+    private val fastfoodBucketScaleFactor = 0.2f
     private val iceCreamScaleFactor = 0.4f
-    private val donutScaleFactor = 0.1f
+    private val donutScaleFactor = 0.09f
     private val coffeeScaleFactor = 0.1f
     private val fruitScaleFactor = 0.1f
     private val fastfoodScaleFactor = 0.09f
@@ -199,11 +199,11 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
     private fun getBucketBitmapForTheme(theme: String?): Bitmap {
         return when (theme) {
-            "donut" -> BitmapFactory.decodeResource(resources, R.drawable.donut_bucket)
-            "coffee" -> BitmapFactory.decodeResource(resources, R.drawable.donut_bucket)
-            "fast_food" -> BitmapFactory.decodeResource(resources, R.drawable.bucket1)
-            "fruit" -> BitmapFactory.decodeResource(resources, R.drawable.bucket1)
-            else -> BitmapFactory.decodeResource(resources, R.drawable.bucket)
+            "donut" -> BitmapFactory.decodeResource(resources, R.drawable.donutbucket)
+            "coffee" -> BitmapFactory.decodeResource(resources, R.drawable.coffeebucket)
+            "fast_food" -> BitmapFactory.decodeResource(resources, R.drawable.fastfoodbucket)
+            "fruit" -> BitmapFactory.decodeResource(resources, R.drawable.fruitbucket)
+            else -> BitmapFactory.decodeResource(resources, R.drawable.icecreambucket)
         }
     }
 
