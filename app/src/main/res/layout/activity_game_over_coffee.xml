@@ -9,7 +9,7 @@
         android:id="@+id/game_over_icon"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/game_over_icon"
+        android:src="@drawable/coffee_game_over"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
 
@@ -47,7 +47,7 @@
         android:layout_centerHorizontal="true"/>
 
     <Button
-        android:id="@+id/restart_button"
+        android:id="@+id/restart_button_coffee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/high_score_text_view"
@@ -56,7 +56,7 @@
         android:textSize="35sp"
         android:enabled="false"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button_restart1"
-        android:textColor="#362315"
+        android:background="@drawable/button_restart_game_over_coffee"
+        android:textColor="#4E3725"
         android:fontFamily="@font/paytone"/>
 </RelativeLayout>

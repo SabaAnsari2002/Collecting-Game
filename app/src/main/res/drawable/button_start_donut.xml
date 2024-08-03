@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FC95BB"/> <!-- رنگ پس‌زمینه -->
+            <corners android:radius="22dp"/> <!-- گرد کردن گوشه‌ها -->
+            <padding
+                android:left="16dp"
+                android:top="16dp"
+                android:right="16dp"
+                android:bottom="16dp"/>
+        </shape>
+    </item>
+</selector>

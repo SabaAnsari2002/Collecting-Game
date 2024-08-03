@@ -9,31 +9,31 @@
         android:id="@+id/home_icon"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/avatar"
+        android:src="@drawable/coffee_home"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"/>
 
     <Button
-        android:id="@+id/start_button"
+        android:id="@+id/start_button_coffee"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/home_icon"
         android:layout_centerInParent="true"
         android:layout_marginTop="40dp"
-        android:background="@drawable/button_start"
+        android:background="@drawable/button_start_coffee"
         android:fontFamily="@font/paytone"
         android:text="Start"
         android:textColor="#000000"
         android:textSize="30sp" />
 
     <Button
-        android:id="@+id/theme_button"
+        android:id="@+id/theme_button_coffee"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/start_button"
+        android:layout_below="@id/start_button_coffee"
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_start"
+        android:background="@drawable/button_start_coffee"
         android:fontFamily="@font/paytone"
         android:text="Themes"
         android:textColor="#000000"
