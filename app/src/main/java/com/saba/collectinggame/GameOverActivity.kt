@@ -14,7 +14,7 @@ class GameOverActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game_over)
+        setContentView(R.layout.activity_game_over_icecream)
 
         gameOverMusic = MediaPlayer.create(this, R.raw.game_over_music)
         gameOverMusic.start()
@@ -28,7 +28,7 @@ class GameOverActivity : AppCompatActivity() {
         val highScoreTextView: TextView = findViewById(R.id.high_score_text_view)
         highScoreTextView.text = "High Score: $highScore"
 
-        val restartButton: Button = findViewById(R.id.restart_button)
+        val restartButton: Button = findViewById(R.id.restart_button_icecream)
 
         // نمایش دکمه restart بعد از چند ثانیه
         Handler().postDelayed({
