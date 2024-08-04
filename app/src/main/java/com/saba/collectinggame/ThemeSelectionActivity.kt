@@ -27,10 +27,18 @@ class ThemeSelectionActivity : AppCompatActivity() {
 
     }
 
+
     private fun setTheme(theme: String) {
         val prefs = getSharedPreferences("game_prefs", MODE_PRIVATE)
         prefs.edit().putString("selected_theme", theme).apply()
-        val intent = Intent(this, HomeActivity::class.java)
+
+        val intent = when (theme) {
+            "fruit" -> Intent(this, FruitHomeActivity::class.java)
+            "coffee" -> Intent(this, CoffeeHomeActivity::class.java)
+            "donut" -> Intent(this, DonutHomeActivity::class.java)
+            "fast_food" -> Intent(this, FastFoodHomeActivity::class.java)
+            else -> Intent(this, IceCreamHomeActivity::class.java) // اکتیویتی پیش‌فرض
+        }
         startActivity(intent)
         finish()
     }

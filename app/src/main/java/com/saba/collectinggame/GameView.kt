@@ -77,16 +77,13 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
         // Draw bucket
         canvas.drawBitmap(bucketBitmap, bucketX, bucketY, paint)
-
         // Draw score, missed and high score
         paint.textSize = 50f
         canvas.drawText("Score: $score", 50f, 100f, paint)
         canvas.drawText("Missed: $missed", 50f, 200f, paint)
         canvas.drawText("High Score: $highScore", 50f, 300f, paint)
-
         // Draw new record message if needed
         if (showNewRecordMessage) {
             paint.color = Color.RED
@@ -101,13 +98,16 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             } else {
                 Intent(context, GameOverActivity::class.java)
             }
+
             if (score > highScore) {
                 highScore = score
                 prefs.edit().putInt("high_score", highScore).apply()
             }
+
             intent.putExtra("score", score)
             intent.putExtra("high_score", highScore)
             context.startActivity(intent)
+            endGame() // فراخوانی تابع endGame برای نمایش صفحه گیم اور مربوط به تم انتخاب شده
             return
         }
 
@@ -153,7 +153,6 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             val iceCream = iterator.next()
             iceCream.y += currentSpeed
             iceCream.rotation += 2f // Adjust rotation speed here
-
             if (iceCream.y > height) {
                 iterator.remove()
                 missed++
@@ -166,17 +165,32 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 )
                 canvas.drawBitmap(iceCream.bitmap, iceCream.x, iceCream.y, paint)
                 canvas.restore()
+            }
 
-                if (iceCream.x in bucketX..(bucketX + bucketBitmap.width) && iceCream.y in bucketY..(bucketY + bucketBitmap.height)) {
-                    iterator.remove()
-                    score++
-                }
+            if (iceCream.x in bucketX..(bucketX + bucketBitmap.width) && iceCream.y in bucketY..(bucketY + bucketBitmap.height)) {
+                iterator.remove()
+                score++
             }
         }
 
         invalidate()
     }
+    private fun endGame() {
+        val prefs = context.getSharedPreferences("game_prefs", Context.MODE_PRIVATE)
+        val selectedTheme = prefs.getString("selected_theme", "default")
 
+        val intent = when (selectedTheme) {
+            "fruit" -> Intent(context, FruitGameOverActivity::class.java)
+            "donut" -> Intent(context, DonutGameOverActivity::class.java)
+            "coffee" -> Intent(context, CoffeeGameOverActivity::class.java)
+            "fast_food" -> Intent(context, FastFoodGameOverActivity::class.java)
+            else -> Intent(context, IceCreamGameOverActivity::class.java) // اکتیویتی پیش‌فرض
+        }
+        intent.putExtra("score", score)
+        intent.putExtra("high_score", highScore)
+        context.startActivity(intent)
+        (context as MainActivity).finish()
+    }
     private fun spawnIceCream() {
         val bitmap = iceCreamBitmaps[random.nextInt(iceCreamBitmaps.size)]
         val scaledBitmap = Bitmap.createScaledBitmap(
