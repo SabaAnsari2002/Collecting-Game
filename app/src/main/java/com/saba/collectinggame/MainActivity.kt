@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(GameView(this))
-
         gameMusic = MediaPlayer.create(this, R.raw.music)
         gameMusic.isLooping = true
         gameMusic.start()
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showExitConfirmationDialog() {
         AlertDialog.Builder(this).apply {
-            setMessage("آیا می‌خواهید از بازی خارج شوید؟")
+            setMessage("آیا میخواهید از بازی خارج شوید؟")
             setCancelable(true)
             setPositiveButton("بله") { _, _ ->
                 val intent = Intent(this@MainActivity, HomeActivity::class.java)
@@ -59,4 +58,5 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         gameMusic.release()
     }
+
 }

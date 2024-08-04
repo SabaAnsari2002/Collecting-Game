@@ -25,6 +25,22 @@
         <activity
             android:name=".HomeActivity"
             android:exported="true" />
+        <activity
+            android:name=".IceCreamHomeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DonutHomeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".FruitHomeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".FastFoodHomeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CoffeeHomeActivity"
+            android:exported="true" />
+
 
         <activity
             android:name=".MainActivity"
@@ -33,6 +49,22 @@
         <activity
             android:name=".GameOverActivity"
             android:exported="true" />
+        <activity
+            android:name=".IceCreamGameOverActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DonutGameOverActivity"
+            android:exported="true" />
+        <activity
+            android:name=".FruitGameOverActivity"
+            android:exported="true" />
+        <activity
+            android:name=".FastFoodGameOverActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CoffeeGameOverActivity"
+            android:exported="true" />
+
 
         <activity
             android:name=".WinActivity"
