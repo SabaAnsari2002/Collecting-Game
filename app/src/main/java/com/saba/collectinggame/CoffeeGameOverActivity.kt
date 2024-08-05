@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
 class CoffeeGameOverActivity : AppCompatActivity() {
@@ -39,6 +41,28 @@ class CoffeeGameOverActivity : AppCompatActivity() {
                 finish()
             }
         }, 3000) // دکمه restart بعد از 3 ثانیه فعال می‌شود
+
+        // Set up the back press callback
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showExitConfirmationDialog()
+            }
+        })
+    }
+
+    private fun showExitConfirmationDialog() {
+        AlertDialog.Builder(this).apply {
+            setMessage("Do you want to exit the game?")
+            setCancelable(true)
+            setPositiveButton("Yes") { _, _ ->
+                val intent = Intent(this@CoffeeGameOverActivity, CoffeeHomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+        }.create().show()
     }
 
     override fun onPause() {
