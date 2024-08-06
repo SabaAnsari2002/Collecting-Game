@@ -56,7 +56,7 @@
         android:textSize="35sp"
         android:enabled="false"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button_restart_game_over_fastfood"
+        android:background="@drawable/button_restart_game_over_fast_food"
         android:textColor="#000000"
         android:fontFamily="@font/paytone"/>
 </RelativeLayout>
