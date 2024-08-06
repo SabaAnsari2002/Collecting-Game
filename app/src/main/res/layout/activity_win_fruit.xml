@@ -9,7 +9,7 @@
         android:id="@+id/win_icon"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/icecream_win"
+        android:src="@drawable/fruit_win"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
 
@@ -56,7 +56,7 @@
         android:textSize="35sp"
         android:enabled="false"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button_restart_win_ice_cream"
+        android:background="@drawable/button_restart_win_fruit"
         android:textColor="#F0070707"
         android:fontFamily="@font/paytone"/>
 </RelativeLayout>
