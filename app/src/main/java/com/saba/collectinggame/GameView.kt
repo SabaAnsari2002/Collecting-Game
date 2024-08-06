@@ -93,23 +93,34 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
         // Check if game over
         if (missed >= 5) {
-            val intent = if (score > highScore) {
-                Intent(context, WinActivity::class.java)
-            } else {
-                Intent(context, GameOverActivity::class.java)
-            }
-
             if (score > highScore) {
                 highScore = score
                 prefs.edit().putInt("high_score", highScore).apply()
+                winGame() // فراخوانی تابع winGame برای نمایش صفحه پیروزی مربوط به تم انتخاب شده
+            } else {
+                endGame() // فراخوانی تابع endGame برای نمایش صفحه گیم اور مربوط به تم انتخاب شده
             }
-
-            intent.putExtra("score", score)
-            intent.putExtra("high_score", highScore)
-            context.startActivity(intent)
-            endGame() // فراخوانی تابع endGame برای نمایش صفحه گیم اور مربوط به تم انتخاب شده
             return
         }
+//        // Check if game over
+//        if (missed >= 5) {
+//            val intent = if (score > highScore) {
+//                Intent(context, WinActivity::class.java)
+//            } else {
+//                Intent(context, GameOverActivity::class.java)
+//            }
+//
+//            if (score > highScore) {
+//                highScore = score
+//                prefs.edit().putInt("high_score", highScore).apply()
+//            }
+//
+//            intent.putExtra("score", score)
+//            intent.putExtra("high_score", highScore)
+//            context.startActivity(intent)
+//            endGame() // فراخوانی تابع endGame برای نمایش صفحه گیم اور مربوط به تم انتخاب شده
+//            return
+//        }
 
         // Update high score and show new record message
         if (score > highScore && !newRecordFlag) {
@@ -175,6 +186,23 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
         invalidate()
     }
+
+    private fun winGame() {
+        val prefs = context.getSharedPreferences("game_prefs", Context.MODE_PRIVATE)
+        val selectedTheme = prefs.getString("selected_theme", "default")
+        val intent = when (selectedTheme) {
+            "fruit" -> Intent(context, FruitWinActivity::class.java)
+            "donut" -> Intent(context, DonutWinActivity::class.java)
+            "coffee" -> Intent(context, CoffeeWinActivity::class.java)
+            "fast_food" -> Intent(context, FastFoodWinActivity::class.java)
+            else -> Intent(context, IceCreamWinActivity::class.java) // اکتیویتی پیشفرض
+        }
+        intent.putExtra("score", score)
+        intent.putExtra("high_score", highScore)
+        context.startActivity(intent)
+        (context as MainActivity).finish()
+    }
+
     private fun endGame() {
         val prefs = context.getSharedPreferences("game_prefs", Context.MODE_PRIVATE)
         val selectedTheme = prefs.getString("selected_theme", "default")
