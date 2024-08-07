@@ -26,6 +26,8 @@ class SplashActivity : AppCompatActivity() {
             "coffee" -> R.layout.activity_splash_coffee
             "donut" -> R.layout.activity_splash_donut
             "fast_food" -> R.layout.activity_splash_fast_food
+            "gun" -> R.layout.activity_splash_gun
+
             else -> R.layout.activity_splash_ice_cream
         }
 
@@ -45,6 +47,8 @@ class SplashActivity : AppCompatActivity() {
                 "coffee" -> Intent(this, CoffeeHomeActivity::class.java)
                 "donut" -> Intent(this, DonutHomeActivity::class.java)
                 "fast_food" -> Intent(this, FastFoodHomeActivity::class.java)
+                "gun" -> Intent(this, GunHomeActivity::class.java)
+
                 else -> Intent(this, IceCreamHomeActivity::class.java)
             }
             startActivity(intent)

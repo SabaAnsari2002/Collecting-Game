@@ -23,9 +23,6 @@
         </activity>
 
         <activity
-            android:name=".HomeActivity"
-            android:exported="true" />
-        <activity
             android:name=".IceCreamHomeActivity"
             android:exported="true" />
         <activity
@@ -40,15 +37,14 @@
         <activity
             android:name=".CoffeeHomeActivity"
             android:exported="true" />
-
+        <activity
+            android:name=".GunHomeActivity"
+            android:exported="true" />
 
         <activity
             android:name=".MainActivity"
             android:exported="false" />
 
-        <activity
-            android:name=".GameOverActivity"
-            android:exported="true" />
         <activity
             android:name=".IceCreamGameOverActivity"
             android:exported="true" />
@@ -64,7 +60,9 @@
         <activity
             android:name=".CoffeeGameOverActivity"
             android:exported="true" />
-
+        <activity
+            android:name=".GunGameOverActivity"
+            android:exported="true" />
 
         <activity
             android:name=".IceCreamWinActivity"
@@ -81,6 +79,10 @@
         <activity
             android:name=".CoffeeWinActivity"
             android:exported="true" />
+        <activity
+            android:name=".GunWinActivity"
+            android:exported="true" />
+
         <activity
             android:name=".ThemeSelectionActivity"
             android:exported="true" />

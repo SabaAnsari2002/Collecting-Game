@@ -17,6 +17,7 @@ class ThemeSelectionActivity : AppCompatActivity() {
         val donutTheme: LinearLayout = findViewById(R.id.donut_theme)
         val fastFoodTheme: LinearLayout = findViewById(R.id.fast_food_theme)
         val fruitTheme: LinearLayout = findViewById(R.id.fruit_theme)
+        val gunTheme: LinearLayout = findViewById(R.id.gun_theme)
 
 
         iceCreamTheme.setOnClickListener { setTheme("ice_cream") }
@@ -24,6 +25,7 @@ class ThemeSelectionActivity : AppCompatActivity() {
         donutTheme.setOnClickListener { setTheme("donut") }
         fastFoodTheme.setOnClickListener { setTheme("fast_food") }
         fruitTheme.setOnClickListener { setTheme("fruit") }
+        gunTheme.setOnClickListener { setTheme("gun") }
 
     }
 
@@ -37,6 +39,7 @@ class ThemeSelectionActivity : AppCompatActivity() {
             "coffee" -> Intent(this, CoffeeHomeActivity::class.java)
             "donut" -> Intent(this, DonutHomeActivity::class.java)
             "fast_food" -> Intent(this, FastFoodHomeActivity::class.java)
+            "gun" -> Intent(this, GunHomeActivity::class.java)
             else -> Intent(this, IceCreamHomeActivity::class.java) // اکتیویتی پیش‌فرض
         }
         startActivity(intent)
