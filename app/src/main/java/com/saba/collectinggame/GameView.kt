@@ -30,11 +30,14 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private val coffeeBucketScaleFactor = 0.18f
     private val fruitBucketScaleFactor = 0.18f
     private val fastfoodBucketScaleFactor = 0.2f
+    private val gunBucketScaleFactor = 0.2f
+
     private val iceCreamScaleFactor = 0.4f
     private val donutScaleFactor = 0.09f
     private val coffeeScaleFactor = 0.1f
     private val fruitScaleFactor = 0.1f
     private val fastfoodScaleFactor = 0.09f
+    private val gunScaleFactor = 0.11f
 
     // Variables for score and missed ice creams
     private var score = 0
@@ -102,25 +105,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             }
             return
         }
-//        // Check if game over
-//        if (missed >= 5) {
-//            val intent = if (score > highScore) {
-//                Intent(context, WinActivity::class.java)
-//            } else {
-//                Intent(context, GameOverActivity::class.java)
-//            }
-//
-//            if (score > highScore) {
-//                highScore = score
-//                prefs.edit().putInt("high_score", highScore).apply()
-//            }
-//
-//            intent.putExtra("score", score)
-//            intent.putExtra("high_score", highScore)
-//            context.startActivity(intent)
-//            endGame() // فراخوانی تابع endGame برای نمایش صفحه گیم اور مربوط به تم انتخاب شده
-//            return
-//        }
+
 
         // Update high score and show new record message
         if (score > highScore && !newRecordFlag) {
@@ -195,6 +180,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "donut" -> Intent(context, DonutWinActivity::class.java)
             "coffee" -> Intent(context, CoffeeWinActivity::class.java)
             "fast_food" -> Intent(context, FastFoodWinActivity::class.java)
+            "gun" -> Intent(context, GunWinActivity::class.java)
+
             else -> Intent(context, IceCreamWinActivity::class.java) // اکتیویتی پیشفرض
         }
         intent.putExtra("score", score)
@@ -212,6 +199,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "donut" -> Intent(context, DonutGameOverActivity::class.java)
             "coffee" -> Intent(context, CoffeeGameOverActivity::class.java)
             "fast_food" -> Intent(context, FastFoodGameOverActivity::class.java)
+            "gun" -> Intent(context, GunGameOverActivity::class.java)
+
             else -> Intent(context, IceCreamGameOverActivity::class.java) // اکتیویتی پیش‌فرض
         }
         intent.putExtra("score", score)
@@ -245,6 +234,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "coffee" -> BitmapFactory.decodeResource(resources, R.drawable.coffeebucket)
             "fast_food" -> BitmapFactory.decodeResource(resources, R.drawable.fastfoodbucket)
             "fruit" -> BitmapFactory.decodeResource(resources, R.drawable.fruitbucket)
+            "gun" -> BitmapFactory.decodeResource(resources, R.drawable.gunbucket)
             else -> BitmapFactory.decodeResource(resources, R.drawable.icecreambucket)
         }
     }
@@ -255,6 +245,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "coffee" -> coffeeBucketScaleFactor
             "fast_food" -> fastfoodBucketScaleFactor
             "fruit" -> fruitBucketScaleFactor
+            "gun" -> gunBucketScaleFactor
             else -> defaultBucketScaleFactor
         }
     }
@@ -265,6 +256,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "coffee" -> coffeeScaleFactor
             "fast_food" -> fastfoodScaleFactor
             "fruit" -> fruitScaleFactor
+            "gun" -> gunScaleFactor
             else -> iceCreamScaleFactor
         }
     }
@@ -299,7 +291,10 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 BitmapFactory.decodeResource(resources, R.drawable.fastfood3),
                 BitmapFactory.decodeResource(resources, R.drawable.fastfood4),
                 BitmapFactory.decodeResource(resources, R.drawable.fastfood5),
-                BitmapFactory.decodeResource(resources, R.drawable.fastfood6)
+                BitmapFactory.decodeResource(resources, R.drawable.fastfood6),
+                BitmapFactory.decodeResource(resources, R.drawable.fastfood7),
+                BitmapFactory.decodeResource(resources, R.drawable.fastfood8)
+
             )
             "fruit" -> listOf(
                 BitmapFactory.decodeResource(resources, R.drawable.fruit1),
@@ -307,7 +302,28 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 BitmapFactory.decodeResource(resources, R.drawable.fruit3),
                 BitmapFactory.decodeResource(resources, R.drawable.fruit4),
                 BitmapFactory.decodeResource(resources, R.drawable.fruit5),
-                BitmapFactory.decodeResource(resources, R.drawable.fruit6)
+                BitmapFactory.decodeResource(resources, R.drawable.fruit6),
+                BitmapFactory.decodeResource(resources, R.drawable.fruit7),
+                BitmapFactory.decodeResource(resources, R.drawable.fruit8)
+
+
+            )
+
+            "gun" -> listOf(
+                BitmapFactory.decodeResource(resources, R.drawable.gun1),
+                BitmapFactory.decodeResource(resources, R.drawable.gun2),
+                BitmapFactory.decodeResource(resources, R.drawable.gun3),
+                BitmapFactory.decodeResource(resources, R.drawable.gun4),
+                BitmapFactory.decodeResource(resources, R.drawable.gun5),
+                BitmapFactory.decodeResource(resources, R.drawable.gun6),
+                BitmapFactory.decodeResource(resources, R.drawable.gun7),
+                BitmapFactory.decodeResource(resources, R.drawable.gun8),
+                BitmapFactory.decodeResource(resources, R.drawable.gun9),
+                BitmapFactory.decodeResource(resources, R.drawable.gun10),
+                BitmapFactory.decodeResource(resources, R.drawable.gun11),
+                BitmapFactory.decodeResource(resources, R.drawable.gun12),
+                BitmapFactory.decodeResource(resources, R.drawable.gun13)
+
             )
             else -> listOf(
                 BitmapFactory.decodeResource(resources, R.drawable.ice_cream1),
@@ -315,7 +331,12 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 BitmapFactory.decodeResource(resources, R.drawable.ice_cream3),
                 BitmapFactory.decodeResource(resources, R.drawable.ice_cream4),
                 BitmapFactory.decodeResource(resources, R.drawable.ice_cream5),
-                BitmapFactory.decodeResource(resources, R.drawable.ice_cream6)
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream6),
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream7),
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream8),
+                BitmapFactory.decodeResource(resources, R.drawable.ice_cream9)
+
+
             )
         }
     }

@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                     "coffee" -> Intent(this@MainActivity, CoffeeHomeActivity::class.java)
                     "donut" -> Intent(this@MainActivity, DonutHomeActivity::class.java)
                     "fast_food" -> Intent(this@MainActivity, FastFoodHomeActivity::class.java)
+                    "gun" -> Intent(this@MainActivity, GunHomeActivity::class.java)
                     else -> Intent(this@MainActivity, IceCreamHomeActivity::class.java)
                 }
                 startActivity(intent)
