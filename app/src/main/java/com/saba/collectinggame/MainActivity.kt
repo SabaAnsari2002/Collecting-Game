@@ -11,10 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
     private lateinit var gameMusic: MediaPlayer
     private lateinit var prefs: SharedPreferences
+    private var gameView: GameView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(GameView(this))
+        gameView = GameView(this)
+        setContentView(gameView)
         gameMusic = MediaPlayer.create(this, R.raw.music)
         gameMusic.isLooping = true
         gameMusic.start()
@@ -30,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showExitConfirmationDialog() {
+        gameView?.pauseGame() // توقف بازی
+        gameMusic.pause() // توقف موسیقی
         AlertDialog.Builder(this).apply {
             setMessage("Do you want to exit the game?")
             setCancelable(true)
@@ -48,6 +52,8 @@ class MainActivity : AppCompatActivity() {
             }
             setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
+                gameView?.resumeGame() // ادامه بازی
+                gameMusic.start() // ادامه موسیقی
             }
         }.create().show()
     }

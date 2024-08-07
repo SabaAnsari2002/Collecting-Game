@@ -24,6 +24,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private var lastUpdateTime = System.currentTimeMillis()
     private var lastIntervalUpdateTime = System.currentTimeMillis()
 
+    private var isPaused = false // Variable to track pause state
+
     // Scaling factors for bucket and ice creams
     private val defaultBucketScaleFactor = 0.4f
     private val donutBucketScaleFactor = 0.19f
@@ -80,6 +82,9 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+
+        if (isPaused) return
+
         // Draw bucket
         canvas.drawBitmap(bucketBitmap, bucketX, bucketY, paint)
         // Draw score, missed and high score
@@ -170,6 +175,15 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
         }
 
         invalidate()
+    }
+
+    fun pauseGame() {
+        isPaused = true
+    }
+
+    fun resumeGame() {
+        isPaused = false
+        invalidate() // برای بازنقش صفحه پس از ادامه بازی
     }
 
     private fun winGame() {
