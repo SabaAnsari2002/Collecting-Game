@@ -182,8 +182,12 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     }
 
     fun resumeGame() {
+
         isPaused = false
-        invalidate() // برای بازنقش صفحه پس از ادامه بازی
+        lastDropTime = System.currentTimeMillis()
+        lastUpdateTime = System.currentTimeMillis()
+        lastIntervalUpdateTime = System.currentTimeMillis()
+        invalidate()
     }
 
     private fun winGame() {
@@ -236,11 +240,19 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_MOVE) {
-            bucketX = event.x - bucketBitmap.width / 2
+        if (isPaused) return true
+
+        return when (event.action) {
+            MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
+                bucketX = event.x - bucketBitmap.width / 2
+                invalidate()
+                true
+            }
+            else -> super.onTouchEvent(event)
         }
-        return true
     }
+
+
 
     private fun getBucketBitmapForTheme(theme: String?): Bitmap {
         return when (theme) {
