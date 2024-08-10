@@ -4,6 +4,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -12,24 +14,31 @@ class MainActivity : AppCompatActivity() {
     private lateinit var gameMusic: MediaPlayer
     private lateinit var prefs: SharedPreferences
     private var gameView: GameView? = null
+    private lateinit var pauseButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        gameView = GameView(this)
-        setContentView(gameView)
+        setContentView(R.layout.activity_main)
+
+        gameView = findViewById(R.id.gameView)
         gameMusic = MediaPlayer.create(this, R.raw.music)
         gameMusic.isLooping = true
         gameMusic.start()
 
         prefs = getSharedPreferences("game_prefs", MODE_PRIVATE)
 
-        // Set up the back press callback
+        pauseButton = findViewById(R.id.pauseButton)
+        pauseButton.setOnClickListener {
+            showPauseDialog()
+        }
+
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 showExitConfirmationDialog()
             }
         })
     }
+
 
     private fun showExitConfirmationDialog() {
         gameView?.pauseGame() // توقف بازی
@@ -51,6 +60,22 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
             setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+                gameView?.resumeGame() // ادامه بازی
+                gameMusic.start() // ادامه موسیقی
+            }
+        }.create().show()
+    }
+
+    private fun showPauseDialog() {
+        gameView?.pauseGame() // توقف بازی
+        gameMusic.pause() // توقف موسیقی
+
+        AlertDialog.Builder(this).apply {
+            setTitle("Paused")
+            setMessage("Game is paused. What do you want to do?")
+            setCancelable(false)
+            setPositiveButton("Resume") { dialog, _ ->
                 dialog.dismiss()
                 gameView?.resumeGame() // ادامه بازی
                 gameMusic.start() // ادامه موسیقی
