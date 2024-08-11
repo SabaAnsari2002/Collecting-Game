@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Collecting Game</string>
+    <string name="settings">Settings</string>
+
 </resources>

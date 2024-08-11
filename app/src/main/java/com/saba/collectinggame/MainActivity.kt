@@ -1,11 +1,15 @@
 package com.saba.collectinggame
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.view.ViewGroup
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +18,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var gameMusic: MediaPlayer
     private lateinit var prefs: SharedPreferences
     private var gameView: GameView? = null
-    private lateinit var pauseButton: Button
+    private lateinit var pauseButton: ImageButton
+    private var isMuted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +28,9 @@ class MainActivity : AppCompatActivity() {
         gameView = findViewById(R.id.gameView)
         gameMusic = MediaPlayer.create(this, R.raw.music)
         gameMusic.isLooping = true
-        gameMusic.start()
+        if (!isMuted) {
+            gameMusic.start()
+        }
 
         prefs = getSharedPreferences("game_prefs", MODE_PRIVATE)
 
@@ -39,10 +46,11 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
     private fun showExitConfirmationDialog() {
         gameView?.pauseGame() // توقف بازی
-        gameMusic.pause() // توقف موسیقی
+        if (!isMuted) {
+            gameMusic.pause() // توقف موسیقی
+        }
         AlertDialog.Builder(this).apply {
             setMessage("Do you want to exit the game?")
             setCancelable(true)
@@ -62,25 +70,66 @@ class MainActivity : AppCompatActivity() {
             setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
                 gameView?.resumeGame() // ادامه بازی
-                gameMusic.start() // ادامه موسیقی
+                if (!isMuted) {
+                    gameMusic.start() // ادامه موسیقی
+                }
             }
         }.create().show()
     }
 
+    @SuppressLint("MissingInflatedId")
     private fun showPauseDialog() {
         gameView?.pauseGame() // توقف بازی
-        gameMusic.pause() // توقف موسیقی
+        if (!isMuted) {
+            gameMusic.pause() // توقف موسیقی
+        }
 
-        AlertDialog.Builder(this).apply {
-            setTitle("Paused")
-            setMessage("Game is paused. What do you want to do?")
+        val dialogView: View = LayoutInflater.from(this).inflate(R.layout.pause_dialog, null)
+
+        val resumeButton: Button = dialogView.findViewById(R.id.resumeButton)
+        val restartButton: Button = dialogView.findViewById(R.id.restartButton)
+        val muteButton: Button = dialogView.findViewById(R.id.muteButton)
+
+        val alertDialog = AlertDialog.Builder(this).apply {
+            setView(dialogView)
             setCancelable(false)
-            setPositiveButton("Resume") { dialog, _ ->
-                dialog.dismiss()
-                gameView?.resumeGame() // ادامه بازی
+        }.create()
+
+        resumeButton.setOnClickListener {
+            gameView?.resumeGame() // ادامه بازی
+            if (!isMuted) {
                 gameMusic.start() // ادامه موسیقی
             }
-        }.create().show()
+            alertDialog.dismiss() // بستن دیالوگ
+        }
+
+        restartButton.setOnClickListener {
+            restartGame() // ریستارت بازی
+            alertDialog.dismiss() // بستن دیالوگ
+        }
+
+        muteButton.text = if (isMuted) "Unmute" else "Mute"
+        muteButton.setOnClickListener {
+            toggleMute() // میوت یا آن‌میوت کردن موسیقی
+            muteButton.text = if (isMuted) "Unmute" else "Mute"
+        }
+
+        alertDialog.show()
+    }
+
+    private fun restartGame() {
+        val intent = intent
+        finish()
+        startActivity(intent)
+    }
+
+    private fun toggleMute() {
+        if (isMuted) {
+            gameMusic.start()
+        } else {
+            gameMusic.pause()
+        }
+        isMuted = !isMuted
     }
 
     override fun onPause() {
@@ -92,7 +141,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (!gameMusic.isPlaying) {
+        if (!isMuted && !gameMusic.isPlaying) {
             gameMusic.start()
         }
     }

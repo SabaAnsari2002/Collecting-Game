@@ -4,4 +4,5 @@
     <item name="restart_game_button" type="id" />
     <item name="resume_game_button" type="id" />
     <item name="ok_button" type="id" />
+    <item name="dialogTitle" type="id" />
 </resources>
