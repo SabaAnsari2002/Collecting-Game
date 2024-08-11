@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    >
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/paytone"
+        android:text="Settings"
+        android:textColor="#000000"
+        android:textSize="44sp"
+        android:padding="8dp"
+        />
+
+    <Button
+        android:id="@+id/resumeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resume"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_style"
+        android:fontFamily="@font/paytone"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        />
+
+    <Button
+        android:id="@+id/restartButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Restart"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_style"
+        android:fontFamily="@font/paytone"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:layout_marginTop="8dp"
+        />
+
+    <Button
+        android:id="@+id/muteButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mute"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_style"
+        android:fontFamily="@font/paytone"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:layout_marginTop="8dp"
+        />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+</LinearLayout>
