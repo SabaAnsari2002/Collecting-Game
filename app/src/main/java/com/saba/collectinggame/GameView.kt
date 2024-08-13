@@ -7,11 +7,14 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Typeface
 import android.os.Handler
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import java.util.*
+
 
 class GameView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
     private val paint = Paint()
@@ -26,7 +29,6 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
     private var isPaused = false // Variable to track pause state
     private val heartBitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.heart)
-    // Add this in the init block to scale the heartBitmap
     val heartSize = 80 // Desired size for the heart image
     val scaledHeartBitmap = Bitmap.createScaledBitmap(heartBitmap, heartSize, heartSize, true)
 
@@ -82,110 +84,117 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
         bucketX = (displayMetrics.widthPixels / 2 - bucketBitmap.width / 2).toFloat()
         bucketY = (displayMetrics.heightPixels - bucketBitmap.height - 50).toFloat()
         iceCreamBitmaps = getIceCreamBitmapsForTheme(selectedTheme)
+
+        // Load and set custom font
+        val typeface: Typeface? = ResourcesCompat.getFont(context, R.font.paytone)
+        paint.typeface = typeface
+        paint.textSize = 50f // Adjust text size as needed
     }
 
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
 
-override fun onDraw(canvas: Canvas) {
-    super.onDraw(canvas)
+        if (isPaused) return
 
-    if (isPaused) return
+        // Draw bucket
+        canvas.drawBitmap(bucketBitmap, bucketX, bucketY, paint)
 
-    // Draw bucket
-    canvas.drawBitmap(bucketBitmap, bucketX, bucketY, paint)
-    // Draw score, missed and high score
-    paint.textSize = 50f
-    canvas.drawText("Score: $score", 50f, 100f, paint)
+        // Draw score, missed and high score
+        paint.color = Color.BLACK
+        canvas.drawText("Score: $score", 50f, 100f, paint)
 
-    // Draw heart image instead of "Missed"
-    val heartX = 50f
-    val heartY = 150f
-    canvas.drawBitmap(scaledHeartBitmap, heartX, heartY, paint)
-    canvas.drawText(": $missed", heartX + scaledHeartBitmap.width + 10, heartY + scaledHeartBitmap.height / 2 + 20, paint)
+        // Draw heart image instead of "Missed"
+        val heartX = 50f
+        val heartY = 150f
+        canvas.drawBitmap(scaledHeartBitmap, heartX, heartY, paint)
+        canvas.drawText(": $missed", heartX + scaledHeartBitmap.width + 10, heartY + scaledHeartBitmap.height / 2 + 20, paint)
 
-    canvas.drawText("High Score: $highScore", 50f, 300f, paint)
-    // Draw new record message if needed
-    if (showNewRecordMessage) {
-        paint.color = Color.RED
-        canvas.drawText("New Record!", 50f, 400f, paint)
-        paint.color = Color.BLACK // Reset color to default
-    }
+        canvas.drawText("High Score: $highScore", 50f, 300f, paint)
 
-    // Check if game over
-    if (missed <= 0) { // Change condition to check if missed is 0 or less
-        if (score > highScore) {
+        // Draw new record message if needed
+        if (showNewRecordMessage) {
+            paint.color = Color.RED
+            canvas.drawText("New Record!", 50f, 400f, paint)
+            paint.color = Color.BLACK // Reset color to default
+        }
+
+        // Check if game over
+        if (missed <= 0) { // Change condition to check if missed is 0 or less
+            if (score > highScore) {
+                highScore = score
+                prefs.edit().putInt("high_score", highScore).apply()
+                winGame() // فراخوانی تابع winGame برای نمایش صفحه پیروزی مربوط به تم انتخاب شده
+            } else {
+                endGame() // فراخوانی تابع endGame برای نمایش صفحه گیم اور مربوط به تم انتخاب شده
+            }
+            return
+        }
+
+        // Update high score and show new record message
+        if (score > highScore && !newRecordFlag) {
             highScore = score
             prefs.edit().putInt("high_score", highScore).apply()
-            winGame() // فراخوانی تابع winGame برای نمایش صفحه پیروزی مربوط به تم انتخاب شده
-        } else {
-            endGame() // فراخوانی تابع endGame برای نمایش صفحه گیم اور مربوط به تم انتخاب شده
-        }
-        return
-    }
-
-    // Update high score and show new record message
-    if (score > highScore && !newRecordFlag) {
-        highScore = score
-        prefs.edit().putInt("high_score", highScore).apply()
-        newRecordFlag = true
-        if (!newRecordShown) {
-            showNewRecordMessage = true
-            newRecordShown = true
-            Handler().postDelayed({
-                showNewRecordMessage = false
-                invalidate() // Redraw to hide the message
-            }, 1000) // Display message for 1 second
-        }
-    }
-
-    // Update falling speed
-    val currentTime = System.currentTimeMillis()
-    if (currentTime - lastUpdateTime >= 1000) {
-        currentSpeed += 0.5f
-        lastUpdateTime = currentTime
-    }
-
-    // Update spawn interval every 5 seconds
-    if (currentTime - lastIntervalUpdateTime >= 5000) {
-        if (spawnInterval > minSpawnInterval) {
-            spawnInterval -= 10
-        }
-        lastIntervalUpdateTime = currentTime
-    }
-
-    // Spawn ice cream
-    if (currentTime - lastDropTime > spawnInterval) {
-        spawnIceCream()
-        lastDropTime = currentTime
-    }
-
-    // Draw and update ice creams
-    val iterator = iceCreams.iterator()
-    while (iterator.hasNext()) {
-        val iceCream = iterator.next()
-        iceCream.y += currentSpeed
-        iceCream.rotation += 2f // Adjust rotation speed here
-        if (iceCream.y > height) {
-            iterator.remove()
-            missed-- // Decrement missed count
-        } else {
-            canvas.save()
-            canvas.rotate(
-                iceCream.rotation,
-                iceCream.x + iceCream.bitmap.width / 2,
-                iceCream.y + iceCream.bitmap.height / 2
-            )
-            canvas.drawBitmap(iceCream.bitmap, iceCream.x, iceCream.y, paint)
-            canvas.restore()
+            newRecordFlag = true
+            if (!newRecordShown) {
+                showNewRecordMessage = true
+                newRecordShown = true
+                Handler().postDelayed({
+                    showNewRecordMessage = false
+                    invalidate() // Redraw to hide the message
+                }, 1000) // Display message for 1 second
+            }
         }
 
-        if (iceCream.x in bucketX..(bucketX + bucketBitmap.width) && iceCream.y in bucketY..(bucketY + bucketBitmap.height)) {
-            iterator.remove()
-            score++
+        // Update falling speed
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastUpdateTime >= 1000) {
+            currentSpeed += 0.5f
+            lastUpdateTime = currentTime
         }
+
+        // Update spawn interval every 5 seconds
+        if (currentTime - lastIntervalUpdateTime >= 5000) {
+            if (spawnInterval > minSpawnInterval) {
+                spawnInterval -= 10
+            }
+            lastIntervalUpdateTime = currentTime
+        }
+
+        // Spawn ice cream
+        if (currentTime - lastDropTime > spawnInterval) {
+            spawnIceCream()
+            lastDropTime = currentTime
+        }
+
+        // Draw and update ice creams
+        val iterator = iceCreams.iterator()
+        while (iterator.hasNext()) {
+            val iceCream = iterator.next()
+            iceCream.y += currentSpeed
+            iceCream.rotation += 2f // Adjust rotation speed here
+            if (iceCream.y > height) {
+                iterator.remove()
+                missed-- // Decrement missed count
+            } else {
+                canvas.save()
+                canvas.rotate(
+                    iceCream.rotation,
+                    iceCream.x + iceCream.bitmap.width / 2,
+                    iceCream.y + iceCream.bitmap.height / 2
+                )
+                canvas.drawBitmap(iceCream.bitmap, iceCream.x, iceCream.y, paint)
+                canvas.restore()
+            }
+
+            if (iceCream.x in bucketX..(bucketX + bucketBitmap.width) && iceCream.y in bucketY..(bucketY + bucketBitmap.height)) {
+                iterator.remove()
+                score++
+            }
+        }
+
+        invalidate()
     }
 
-    invalidate()
-}
 
 
     fun pauseGame() {
