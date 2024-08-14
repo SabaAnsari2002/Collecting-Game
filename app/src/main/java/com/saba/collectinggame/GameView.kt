@@ -47,6 +47,14 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private val fastfoodScaleFactor = 0.09f
     private val gunScaleFactor = 0.11f
 
+    // تعریف بمب‌ها
+    private val bombs = mutableListOf<Bomb>() // لیست برای ذخیره بمب‌ها
+    private val bombBitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.bomb) // تصویر بمب
+    private val bombSize = 170
+    private val scaledBombBitmap = Bitmap.createScaledBitmap(bombBitmap, bombSize, bombSize, true) // مقیاس‌بندی بمب
+    private var lastBombTime = System.currentTimeMillis() // زمان آخرین بمب
+
+
     // Variables for score and missed ice creams
     private var score = 0
     private var missed = 5 // Initial missed value set to 5
@@ -89,6 +97,9 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
         val typeface: Typeface? = ResourcesCompat.getFont(context, R.font.paytone)
         paint.typeface = typeface
         paint.textSize = 50f // Adjust text size as needed
+
+        lastBombTime = System.currentTimeMillis() - 5000 // بمب باید 5 ثانیه بعد از شروع بیافتد
+
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -160,6 +171,13 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             lastIntervalUpdateTime = currentTime
         }
 
+        // تولید بمب
+        if (currentTime - lastBombTime >= 5000) {
+            spawnBomb()
+            lastBombTime = currentTime
+        }
+
+
         // Spawn ice cream
         if (currentTime - lastDropTime > spawnInterval) {
             spawnIceCream()
@@ -191,10 +209,32 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 score++
             }
         }
+        // رسم و به‌روزرسانی بمب‌ها
+        val bombIterator = bombs.iterator()
+        while (bombIterator.hasNext()) {
+            val bomb = bombIterator.next()
+            bomb.y += currentSpeed
+            if (bomb.y > height) {
+                bombIterator.remove()
+            } else {
+                canvas.drawBitmap(bomb.bitmap, bomb.x, bomb.y, paint)
+            }
 
+            // بررسی برخورد بمب با سطل
+            if (bomb.x in bucketX..(bucketX + bucketBitmap.width) && bomb.y in bucketY..(bucketY + bucketBitmap.height)) {
+                bombIterator.remove()
+                missed-- // کاهش تعداد missed
+            }
+        }
         invalidate()
     }
 
+
+    private fun spawnBomb() {
+        val x = random.nextInt(width - scaledBombBitmap.width)
+        val y = 0f
+        bombs.add(Bomb(x.toFloat(), y, scaledBombBitmap)) // تبدیل x به Float
+    }
 
 
     fun pauseGame() {
@@ -367,8 +407,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 BitmapFactory.decodeResource(resources, R.drawable.gun9),
                 BitmapFactory.decodeResource(resources, R.drawable.gun10),
                 BitmapFactory.decodeResource(resources, R.drawable.gun11),
-                BitmapFactory.decodeResource(resources, R.drawable.gun12),
-                BitmapFactory.decodeResource(resources, R.drawable.gun13)
+                BitmapFactory.decodeResource(resources, R.drawable.gun12)
 
             )
             else -> listOf(
@@ -388,4 +427,6 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     }
 
     data class IceCream(val x: Float, var y: Float, val bitmap: Bitmap, var rotation: Float = 0f)
+    data class Bomb(val x: Float, var y: Float, val bitmap: Bitmap) // داده‌های بمب
+
 }
