@@ -26,10 +26,11 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private var lastDropTime = System.currentTimeMillis()
     private var lastUpdateTime = System.currentTimeMillis()
     private var lastIntervalUpdateTime = System.currentTimeMillis()
+    private var gameStartTime = System.currentTimeMillis() // زمان شروع بازی
 
-    private var isPaused = false // Variable to track pause state
+    private var isPaused = false
     private val heartBitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.heart)
-    val heartSize = 80 // Desired size for the heart image
+    val heartSize = 80
     val scaledHeartBitmap = Bitmap.createScaledBitmap(heartBitmap, heartSize, heartSize, true)
 
     // Scaling factors for bucket and ice creams
@@ -47,25 +48,24 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private val fastfoodScaleFactor = 0.09f
     private val gunScaleFactor = 0.11f
 
-    // تعریف بمب‌ها
-    private val bombs = mutableListOf<Bomb>() // لیست برای ذخیره بمب‌ها
-    private val bombBitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.bomb) // تصویر بمب
+    // Definition of bombs
+    private val bombs = mutableListOf<Bomb>()
+    private val bombBitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.bomb)
     private val bombSize = 170
-    private val scaledBombBitmap = Bitmap.createScaledBitmap(bombBitmap, bombSize, bombSize, true) // مقیاس‌بندی بمب
-    private var lastBombTime = System.currentTimeMillis() // زمان آخرین بمب
-
+    private val scaledBombBitmap = Bitmap.createScaledBitmap(bombBitmap, bombSize, bombSize, true)
+    private var lastBombTime = System.currentTimeMillis() - 8000 // Last bomb time should be 8 seconds earlier to wait 8 seconds before first bomb appears
 
     // Variables for score and missed ice creams
     private var score = 0
-    private var missed = 5 // Initial missed value set to 5
+    private var missed = 5
 
     // Initial speed and speed increment
     private val initialSpeed = 10f
     private var currentSpeed = initialSpeed
 
     // Variables for spawn interval and minimum spawn interval
-    private var spawnInterval = 500L // Initial spawn interval in milliseconds
-    private val minSpawnInterval = 200L // Minimum spawn interval in milliseconds
+    private var spawnInterval = 500L
+    private val minSpawnInterval = 200L
 
     // SharedPreferences for high score and theme
     private val prefs = context.getSharedPreferences("game_prefs", Context.MODE_PRIVATE)
@@ -73,9 +73,9 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private val selectedTheme = prefs.getString("selected_theme", "default")
 
     // Variables for new record message
-    private var newRecordFlag = false // Flag to indicate if new record is set
-    private var showNewRecordMessage = false // Flag to show new record message
-    private var newRecordShown = false // Ensure the message is shown only once
+    private var newRecordFlag = false
+    private var showNewRecordMessage = false
+    private var newRecordShown = false
 
     // Bitmaps for ice creams
     private val iceCreamBitmaps: List<Bitmap>
@@ -96,10 +96,9 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
         // Load and set custom font
         val typeface: Typeface? = ResourcesCompat.getFont(context, R.font.paytone)
         paint.typeface = typeface
-        paint.textSize = 50f // Adjust text size as needed
+        paint.textSize = 50f
 
-        lastBombTime = System.currentTimeMillis() - 5000 // بمب باید 5 ثانیه بعد از شروع بیافتد
-
+        lastBombTime = System.currentTimeMillis() - 8000 // Ensure the first bomb appears after 7 seconds
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -130,13 +129,13 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
         }
 
         // Check if game over
-        if (missed <= 0) { // Change condition to check if missed is 0 or less
+        if (missed <= 0) {
             if (score > highScore) {
                 highScore = score
                 prefs.edit().putInt("high_score", highScore).apply()
-                winGame() // فراخوانی تابع winGame برای نمایش صفحه پیروزی مربوط به تم انتخاب شده
+                winGame()
             } else {
-                endGame() // فراخوانی تابع endGame برای نمایش صفحه گیم اور مربوط به تم انتخاب شده
+                endGame()
             }
             return
         }
@@ -151,8 +150,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 newRecordShown = true
                 Handler().postDelayed({
                     showNewRecordMessage = false
-                    invalidate() // Redraw to hide the message
-                }, 1000) // Display message for 1 second
+                    invalidate()
+                }, 1000)
             }
         }
 
@@ -171,12 +170,11 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             lastIntervalUpdateTime = currentTime
         }
 
-        // تولید بمب
-        if (currentTime - lastBombTime >= 5000) {
+        // Spawn bomb if 7 seconds have passed since game start
+        if (currentTime - gameStartTime >= 7000 && currentTime - lastBombTime >= 5000) {
             spawnBomb()
             lastBombTime = currentTime
         }
-
 
         // Spawn ice cream
         if (currentTime - lastDropTime > spawnInterval) {
@@ -189,10 +187,10 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
         while (iterator.hasNext()) {
             val iceCream = iterator.next()
             iceCream.y += currentSpeed
-            iceCream.rotation += 2f // Adjust rotation speed here
+            iceCream.rotation += 2f
             if (iceCream.y > height) {
                 iterator.remove()
-                missed-- // Decrement missed count
+                missed--
             } else {
                 canvas.save()
                 canvas.rotate(
@@ -209,44 +207,53 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 score++
             }
         }
-        // رسم و به‌روزرسانی بمب‌ها
+        
+        // Draw and update bombs
         val bombIterator = bombs.iterator()
         while (bombIterator.hasNext()) {
             val bomb = bombIterator.next()
             bomb.y += currentSpeed
+            bomb.rotation += 3f // Adjust rotation speed as needed
             if (bomb.y > height) {
                 bombIterator.remove()
             } else {
+                canvas.save()
+                canvas.rotate(
+                    bomb.rotation,
+                    bomb.x + bomb.bitmap.width / 2,
+                    bomb.y + bomb.bitmap.height / 2
+                )
                 canvas.drawBitmap(bomb.bitmap, bomb.x, bomb.y, paint)
+                canvas.restore()
             }
 
-            // بررسی برخورد بمب با سطل
+            // Check bomb collision with bucket
             if (bomb.x in bucketX..(bucketX + bucketBitmap.width) && bomb.y in bucketY..(bucketY + bucketBitmap.height)) {
                 bombIterator.remove()
-                missed-- // کاهش تعداد missed
+                missed--
             }
         }
+
+        // Request next frame update
         invalidate()
     }
-
 
     private fun spawnBomb() {
         val x = random.nextInt(width - scaledBombBitmap.width)
         val y = 0f
-        bombs.add(Bomb(x.toFloat(), y, scaledBombBitmap)) // تبدیل x به Float
+        bombs.add(Bomb(x.toFloat(), y, scaledBombBitmap))
     }
-
 
     fun pauseGame() {
         isPaused = true
     }
 
     fun resumeGame() {
-
         isPaused = false
         lastDropTime = System.currentTimeMillis()
         lastUpdateTime = System.currentTimeMillis()
         lastIntervalUpdateTime = System.currentTimeMillis()
+        gameStartTime = System.currentTimeMillis() // Reset game start time
         invalidate()
     }
 
@@ -259,8 +266,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "coffee" -> Intent(context, CoffeeWinActivity::class.java)
             "fast_food" -> Intent(context, FastFoodWinActivity::class.java)
             "gun" -> Intent(context, GunWinActivity::class.java)
-
-            else -> Intent(context, IceCreamWinActivity::class.java) // اکتیویتی پیشفرض
+            else -> Intent(context, IceCreamWinActivity::class.java)
         }
         intent.putExtra("score", score)
         intent.putExtra("high_score", highScore)
@@ -271,21 +277,20 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private fun endGame() {
         val prefs = context.getSharedPreferences("game_prefs", Context.MODE_PRIVATE)
         val selectedTheme = prefs.getString("selected_theme", "default")
-
         val intent = when (selectedTheme) {
             "fruit" -> Intent(context, FruitGameOverActivity::class.java)
             "donut" -> Intent(context, DonutGameOverActivity::class.java)
             "coffee" -> Intent(context, CoffeeGameOverActivity::class.java)
             "fast_food" -> Intent(context, FastFoodGameOverActivity::class.java)
             "gun" -> Intent(context, GunGameOverActivity::class.java)
-
-            else -> Intent(context, IceCreamGameOverActivity::class.java) // اکتیویتی پیش‌فرض
+            else -> Intent(context, IceCreamGameOverActivity::class.java)
         }
         intent.putExtra("score", score)
         intent.putExtra("high_score", highScore)
         context.startActivity(intent)
         (context as MainActivity).finish()
     }
+
     private fun spawnIceCream() {
         val bitmap = iceCreamBitmaps[random.nextInt(iceCreamBitmaps.size)]
         val scaledBitmap = Bitmap.createScaledBitmap(
@@ -311,8 +316,6 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             else -> super.onTouchEvent(event)
         }
     }
-
-
 
     private fun getBucketBitmapForTheme(theme: String?): Bitmap {
         return when (theme) {
@@ -369,7 +372,6 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 BitmapFactory.decodeResource(resources, R.drawable.coffee9),
                 BitmapFactory.decodeResource(resources, R.drawable.coffee10),
                 BitmapFactory.decodeResource(resources, R.drawable.coffee11)
-
             )
             "fast_food" -> listOf(
                 BitmapFactory.decodeResource(resources, R.drawable.fastfood1),
@@ -379,7 +381,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 BitmapFactory.decodeResource(resources, R.drawable.fastfood5),
                 BitmapFactory.decodeResource(resources, R.drawable.fastfood6),
                 BitmapFactory.decodeResource(resources, R.drawable.fastfood7),
-                BitmapFactory.decodeResource(resources, R.drawable.fastfood8)
+                BitmapFactory.decodeResource(resources, R.drawable.fastfood8),
+                BitmapFactory.decodeResource(resources, R.drawable.fastfood9)
 
             )
             "fruit" -> listOf(
@@ -391,10 +394,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 BitmapFactory.decodeResource(resources, R.drawable.fruit6),
                 BitmapFactory.decodeResource(resources, R.drawable.fruit7),
                 BitmapFactory.decodeResource(resources, R.drawable.fruit8)
-
-
             )
-
             "gun" -> listOf(
                 BitmapFactory.decodeResource(resources, R.drawable.gun1),
                 BitmapFactory.decodeResource(resources, R.drawable.gun2),
@@ -408,7 +408,6 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 BitmapFactory.decodeResource(resources, R.drawable.gun10),
                 BitmapFactory.decodeResource(resources, R.drawable.gun11),
                 BitmapFactory.decodeResource(resources, R.drawable.gun12)
-
             )
             else -> listOf(
                 BitmapFactory.decodeResource(resources, R.drawable.ice_cream1),
@@ -420,13 +419,12 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 BitmapFactory.decodeResource(resources, R.drawable.ice_cream7),
                 BitmapFactory.decodeResource(resources, R.drawable.ice_cream8),
                 BitmapFactory.decodeResource(resources, R.drawable.ice_cream9)
-
-
             )
         }
     }
 
     data class IceCream(val x: Float, var y: Float, val bitmap: Bitmap, var rotation: Float = 0f)
-    data class Bomb(val x: Float, var y: Float, val bitmap: Bitmap) // داده‌های بمب
+
+    data class Bomb(val x: Float, var y: Float, val bitmap: Bitmap, var rotation: Float = 0f)
 
 }
