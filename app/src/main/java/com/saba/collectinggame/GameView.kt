@@ -50,9 +50,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
     // Definition of bombs
     private val bombs = mutableListOf<Bomb>()
-    private val bombBitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.bomb)
-    private val bombSize = 170
-    private val scaledBombBitmap = Bitmap.createScaledBitmap(bombBitmap, bombSize, bombSize, true)
+    private val bombSize = 160
     private var lastBombTime = System.currentTimeMillis() - 8000 // Last bomb time should be 8 seconds earlier to wait 8 seconds before first bomb appears
 
     // Variables for score and missed ice creams
@@ -238,11 +236,15 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
         invalidate()
     }
 
+
     private fun spawnBomb() {
+        val bombBitmap = getBombBitmapForTheme(selectedTheme)
+        val scaledBombBitmap = Bitmap.createScaledBitmap(bombBitmap, bombSize, bombSize, true)
         val x = random.nextInt(width - scaledBombBitmap.width)
         val y = 0f
         bombs.add(Bomb(x.toFloat(), y, scaledBombBitmap))
     }
+
 
     fun pauseGame() {
         isPaused = true
@@ -349,6 +351,18 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             else -> iceCreamScaleFactor
         }
     }
+
+    private fun getBombBitmapForTheme(theme: String?): Bitmap {
+        return when (theme) {
+            "donut" -> BitmapFactory.decodeResource(resources, R.drawable.bomb2)
+            "coffee" -> BitmapFactory.decodeResource(resources, R.drawable.bomb2)
+            "fast_food" -> BitmapFactory.decodeResource(resources, R.drawable.bomb1)
+            "fruit" -> BitmapFactory.decodeResource(resources, R.drawable.bomb1)
+            "gun" -> BitmapFactory.decodeResource(resources, R.drawable.bomb1)
+            else -> BitmapFactory.decodeResource(resources, R.drawable.bomb2)
+        }
+    }
+
 
     private fun getIceCreamBitmapsForTheme(theme: String?): List<Bitmap> {
         return when (theme) {
