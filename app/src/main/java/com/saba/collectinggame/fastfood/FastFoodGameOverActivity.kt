@@ -1,5 +1,6 @@
 package com.saba.collectinggame
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 class FastFoodGameOverActivity : AppCompatActivity() {
     private lateinit var gameOverMusic: MediaPlayer
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_over_fast_food)
@@ -22,12 +24,16 @@ class FastFoodGameOverActivity : AppCompatActivity() {
 
         val score = intent.getIntExtra("score", 0)
         val highScore = intent.getIntExtra("high_score", 0)
+        val coins = intent.getIntExtra("coins", 0)
 
         val scoreTextView: TextView = findViewById(R.id.score_text_view)
         scoreTextView.text = "Score: $score"
 
         val highScoreTextView: TextView = findViewById(R.id.high_score_text_view)
         highScoreTextView.text = "High Score: $highScore"
+
+        val coinsTextView: TextView = findViewById(R.id.coins_text_view)
+        coinsTextView.text = "Coins: $coins"
 
         val restartButton: Button = findViewById(R.id.restart_button_fastfood)
 

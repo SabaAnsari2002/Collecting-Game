@@ -264,6 +264,9 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
     private fun winGame() {
         val prefs = context.getSharedPreferences("game_prefs", Context.MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putInt("coins", coins)
+        editor.apply()
         val selectedTheme = prefs.getString("selected_theme", "default")
         val intent = when (selectedTheme) {
             "fruit" -> Intent(context, FruitWinActivity::class.java)
@@ -283,6 +286,9 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
 
     private fun endGame() {
         val prefs = context.getSharedPreferences("game_prefs", Context.MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putInt("coins", coins)
+        editor.apply()
         val selectedTheme = prefs.getString("selected_theme", "default")
         val intent = when (selectedTheme) {
             "fruit" -> Intent(context, FruitGameOverActivity::class.java)

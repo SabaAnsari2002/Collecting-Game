@@ -24,7 +24,6 @@ class IceCreamGameOverActivity : AppCompatActivity() {
         val highScore = intent.getIntExtra("high_score", 0)
         val coins = intent.getIntExtra("coins", 0)
 
-
         val scoreTextView: TextView = findViewById(R.id.score_text_view)
         scoreTextView.text = "Score: $score"
 
@@ -46,7 +45,6 @@ class IceCreamGameOverActivity : AppCompatActivity() {
                 finish()
             }
         }, 3000) // دکمه restart بعد از 3 ثانیه فعال می‌شود
-
 
         // Set up the back press callback
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
