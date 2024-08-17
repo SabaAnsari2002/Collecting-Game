@@ -45,7 +45,14 @@
         android:textSize="24sp"
         android:fontFamily="@font/paytone"
         android:layout_centerHorizontal="true"/>
-
+    <TextView
+        android:id="@+id/coins_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coins: 0"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"/>
     <Button
         android:id="@+id/restart_button_icecream"
         android:layout_width="wrap_content"

@@ -56,6 +56,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     // Variables for score and missed ice creams
     private var score = 0
     private var missed = 5
+    private var coins = 0
 
     // Initial speed and speed increment
     private val initialSpeed = 10f
@@ -203,6 +204,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             if (iceCream.x in bucketX..(bucketX + bucketBitmap.width) && iceCream.y in bucketY..(bucketY + bucketBitmap.height)) {
                 iterator.remove()
                 score++
+                coins = score / 10 // 1 coin for every 10 points
+
             }
         }
         
@@ -272,6 +275,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
         }
         intent.putExtra("score", score)
         intent.putExtra("high_score", highScore)
+        intent.putExtra("coins", coins) // Pass coins
+
         context.startActivity(intent)
         (context as MainActivity).finish()
     }
@@ -289,6 +294,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
         }
         intent.putExtra("score", score)
         intent.putExtra("high_score", highScore)
+        intent.putExtra("coins", coins) // Pass coins
         context.startActivity(intent)
         (context as MainActivity).finish()
     }
