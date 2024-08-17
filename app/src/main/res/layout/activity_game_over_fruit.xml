@@ -46,12 +46,23 @@
         android:fontFamily="@font/paytone"
         android:layout_centerHorizontal="true"/>
 
+    <TextView
+        android:id="@+id/coins_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coins: 0"
+        android:layout_below="@id/high_score_text_view"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:fontFamily="@font/paytone"
+        android:layout_centerHorizontal="true"/>
+
     <Button
         android:id="@+id/restart_button_fruit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/high_score_text_view"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:text="Restart"
         android:textSize="35sp"
         android:enabled="false"
@@ -59,4 +70,5 @@
         android:background="@drawable/button_restart_game_over_fruit"
         android:textColor="#000000"
         android:fontFamily="@font/paytone"/>
+
 </RelativeLayout>
