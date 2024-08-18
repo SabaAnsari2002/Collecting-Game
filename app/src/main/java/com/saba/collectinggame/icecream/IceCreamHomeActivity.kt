@@ -15,12 +15,12 @@ class IceCreamHomeActivity : AppCompatActivity() {
 
         val prefs = getSharedPreferences("game_prefs", MODE_PRIVATE)
         val totalCoins = prefs.getInt("total_coins", 0)
+        val savedCoins = prefs.getInt("coins", 0)
 
-        // Update total coins if coming from win or game over screen
-        val coins = intent.getIntExtra("coins", 0)
-        if (coins > 0) {
-            val newTotal = totalCoins + coins
-            prefs.edit().putInt("total_coins", newTotal).apply()
+        // Update total coins if there are saved coins
+        if (savedCoins > 0) {
+            val newTotal = totalCoins + savedCoins
+            prefs.edit().putInt("total_coins", newTotal).putInt("coins", 0).apply()
         }
 
         // Display total coins
