@@ -22,7 +22,7 @@
         android:layout_below="@id/theme_selection_text"
         android:layout_marginTop="50dp"
         android:columnCount="3"
-        android:rowCount="3"
+        android:rowCount="2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:background="@drawable/rounded_corners">
@@ -67,11 +67,24 @@
             android:padding="8dp"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/coffee10"
-                android:contentDescription="Coffee Theme" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/coffee10"
+                    android:contentDescription="Coffee Theme" />
+
+                <ImageView
+                    android:id="@+id/lock_icon_coffee"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/padlock"
+                    android:visibility="visible"
+                    android:layout_gravity="center" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -95,11 +108,24 @@
             android:padding="8dp"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/donut6"
-                android:contentDescription="Donut Theme" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/donut6"
+                    android:contentDescription="Donut Theme" />
+
+                <ImageView
+                    android:id="@+id/lock_icon_donut"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/padlock"
+                    android:visibility="visible"
+                    android:layout_gravity="center" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -123,11 +149,24 @@
             android:padding="8dp"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/fastfood8"
-                android:contentDescription="Fast Food Theme" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/fastfood8"
+                    android:contentDescription="Fast Food Theme" />
+
+                <ImageView
+                    android:id="@+id/lock_icon_fast_food"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/padlock"
+                    android:visibility="visible"
+                    android:layout_gravity="center" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -151,11 +190,24 @@
             android:padding="8dp"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/fruit1"
-                android:contentDescription="Fruit Theme" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/fruit1"
+                    android:contentDescription="Fruit Theme" />
+
+                <ImageView
+                    android:id="@+id/lock_icon_fruit"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/padlock"
+                    android:visibility="visible"
+                    android:layout_gravity="center" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,7 +219,7 @@
                 android:gravity="center"/>
         </LinearLayout>
 
-        <!-- سایر تم ها می توانند به همین صورت اضافه شوند -->
+        <!-- Gun Theme -->
         <LinearLayout
             android:id="@+id/gun_theme"
             android:layout_width="0dp"
@@ -179,11 +231,24 @@
             android:padding="8dp"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/gun4"
-                android:contentDescription="Gun Theme" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/gun4"
+                    android:contentDescription="Gun Theme" />
+
+                <ImageView
+                    android:id="@+id/lock_icon_gun"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/padlock"
+                    android:visibility="visible"
+                    android:layout_gravity="center" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -195,4 +260,15 @@
                 android:gravity="center"/>
         </LinearLayout>
     </GridLayout>
+
+    <TextView
+        android:id="@+id/total_coins_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Coins: 0"
+        android:textSize="34sp"
+        android:fontFamily="@font/paytone"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp"/>
 </RelativeLayout>
