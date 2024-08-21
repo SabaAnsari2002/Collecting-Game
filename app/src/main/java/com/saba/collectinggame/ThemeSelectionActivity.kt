@@ -92,7 +92,18 @@ class ThemeSelectionActivity : AppCompatActivity() {
             "gun" -> R.id.lock_icon_gun
             else -> return
         }
+
+        val priceTextId = when (theme) {
+            "coffee" -> R.id.coffee_price
+            "donut" -> R.id.donut_price
+            "fast_food" -> R.id.fast_food_price
+            "fruit" -> R.id.fruit_price
+            "gun" -> R.id.gun_price
+            else -> return
+        }
+
         findViewById<ImageView>(lockIconId).visibility = View.GONE
+        findViewById<TextView>(priceTextId).visibility = View.GONE  // پنهان کردن قیمت پس از خرید
     }
 
     private fun isThemePurchased(theme: String): Boolean {
@@ -124,19 +135,23 @@ class ThemeSelectionActivity : AppCompatActivity() {
     }
 
     private fun initializeLockIcons() {
-        setLockIconVisibility("coffee", R.id.lock_icon_coffee)
-        setLockIconVisibility("donut", R.id.lock_icon_donut)
-        setLockIconVisibility("fast_food", R.id.lock_icon_fast_food)
-        setLockIconVisibility("fruit", R.id.lock_icon_fruit)
-        setLockIconVisibility("gun", R.id.lock_icon_gun)
+        setLockIconVisibility("coffee", R.id.lock_icon_coffee, R.id.coffee_price)
+        setLockIconVisibility("donut", R.id.lock_icon_donut, R.id.donut_price)
+        setLockIconVisibility("fast_food", R.id.lock_icon_fast_food, R.id.fast_food_price)
+        setLockIconVisibility("fruit", R.id.lock_icon_fruit, R.id.fruit_price)
+        setLockIconVisibility("gun", R.id.lock_icon_gun, R.id.gun_price)
     }
 
-    private fun setLockIconVisibility(theme: String, lockIconId: Int) {
+    private fun setLockIconVisibility(theme: String, lockIconId: Int, priceTextId: Int) {
         val lockIcon = findViewById<ImageView>(lockIconId)
+        val priceText = findViewById<TextView>(priceTextId)
+
         if (isThemePurchased(theme)) {
             lockIcon.visibility = View.GONE
+            priceText.visibility = View.GONE  // پنهان کردن قیمت در صورت خریداری شدن تم
         } else {
             lockIcon.visibility = View.VISIBLE
+            priceText.visibility = View.VISIBLE  // نمایش قیمت در صورت عدم خریداری
         }
     }
 }
