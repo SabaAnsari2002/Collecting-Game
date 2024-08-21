@@ -94,6 +94,18 @@
                 android:fontFamily="@font/paytone"
                 android:textColor="#000000"
                 android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/coffee_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: 10 Coins"
+                android:textSize="18sp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#FF0000"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:visibility="visible"/>
         </LinearLayout>
 
         <!-- Donut Theme -->
@@ -135,6 +147,18 @@
                 android:fontFamily="@font/paytone"
                 android:textColor="#000000"
                 android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/donut_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: 20 Coins"
+                android:textSize="18sp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#FF0000"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:visibility="visible"/>
         </LinearLayout>
 
         <!-- Fast Food Theme -->
@@ -176,6 +200,18 @@
                 android:fontFamily="@font/paytone"
                 android:textColor="#000000"
                 android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/fast_food_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: 30 Coins"
+                android:textSize="18sp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#FF0000"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:visibility="visible"/>
         </LinearLayout>
 
         <!-- Fruit Theme -->
@@ -198,7 +234,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/fruit1"
-                    android:contentDescription="Fruit Theme" />
+                    android:contentDescription="fruit Theme" />
 
                 <ImageView
                     android:id="@+id/lock_icon_fruit"
@@ -217,6 +253,18 @@
                 android:fontFamily="@font/paytone"
                 android:textColor="#000000"
                 android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/fruit_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: 40 Coins"
+                android:textSize="18sp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#FF0000"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:visibility="visible"/>
         </LinearLayout>
 
         <!-- Gun Theme -->
@@ -258,7 +306,23 @@
                 android:fontFamily="@font/paytone"
                 android:textColor="#000000"
                 android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/gun_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: 50 Coins"
+                android:textSize="18sp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#FF0000"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:visibility="visible"/>
         </LinearLayout>
+
+
+
+
     </GridLayout>
 
     <TextView
