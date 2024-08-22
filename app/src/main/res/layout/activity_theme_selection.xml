@@ -8,7 +8,7 @@
         android:id="@+id/theme_selection_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Theme"
+        android:text="Themes"
         android:textSize="50sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
@@ -80,11 +80,12 @@
 
                 <ImageView
                     android:id="@+id/lock_icon_coffee"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/padlock"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/lock"
                     android:visibility="visible"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="end|bottom"
+                    />
             </FrameLayout>
 
             <TextView
@@ -133,11 +134,12 @@
 
                 <ImageView
                     android:id="@+id/lock_icon_donut"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/padlock"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/lock"
                     android:visibility="visible"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="end|bottom"
+                    />
             </FrameLayout>
 
             <TextView
@@ -186,11 +188,12 @@
 
                 <ImageView
                     android:id="@+id/lock_icon_fast_food"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/padlock"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/lock"
                     android:visibility="visible"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="end|bottom"
+                    />
             </FrameLayout>
 
             <TextView
@@ -239,11 +242,12 @@
 
                 <ImageView
                     android:id="@+id/lock_icon_fruit"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/padlock"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/lock"
                     android:visibility="visible"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="end|bottom"
+                    />
             </FrameLayout>
 
             <TextView
@@ -292,11 +296,12 @@
 
                 <ImageView
                     android:id="@+id/lock_icon_gun"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/padlock"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/lock"
                     android:visibility="visible"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="end|bottom"
+                    />
             </FrameLayout>
 
             <TextView
