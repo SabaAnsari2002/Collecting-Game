@@ -40,6 +40,9 @@
         <activity
             android:name=".GunHomeActivity"
             android:exported="true" />
+        <activity
+            android:name=".BearHomeActivity"
+            android:exported="true" />
 
         <activity
             android:name=".MainActivity"
@@ -63,6 +66,9 @@
         <activity
             android:name=".GunGameOverActivity"
             android:exported="true" />
+        <activity
+            android:name=".BearGameOverActivity"
+            android:exported="true" />
 
         <activity
             android:name=".IceCreamWinActivity"
@@ -81,6 +87,9 @@
             android:exported="true" />
         <activity
             android:name=".GunWinActivity"
+            android:exported="true" />
+        <activity
+            android:name=".BearWinActivity"
             android:exported="true" />
 
         <activity
