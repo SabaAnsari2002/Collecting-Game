@@ -1,0 +1,74 @@
+<!-- activity_win.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/win_icon"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/car_win"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/win_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You Win"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_below="@id/win_icon"
+        android:layout_marginTop="26dp"
+        android:fontFamily="@font/paytone"
+        android:textColor="#21E421"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/score_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/win_text_view"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:fontFamily="@font/paytone"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/high_score_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/score_text_view"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:fontFamily="@font/paytone"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/coins_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coins: 0"
+        android:layout_below="@id/high_score_text_view"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:fontFamily="@font/paytone"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/restart_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/high_score_text_view"
+        android:layout_marginTop="60dp"
+        android:text="Restart"
+        android:textSize="35sp"
+        android:enabled="false"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_restart_win_car"
+        android:textColor="#232323"
+        android:fontFamily="@font/paytone"/>
+
+</RelativeLayout>

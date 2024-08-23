@@ -1,0 +1,52 @@
+<!-- activity_home.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/home_icon"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:src="@drawable/car_home"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"/>
+
+    <Button
+        android:id="@+id/start_button_car"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_icon"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_start_car"
+        android:fontFamily="@font/paytone"
+        android:text="Start"
+        android:textColor="#FF2E2E2E"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/theme_button_car"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_button_car"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_start_car"
+        android:fontFamily="@font/paytone"
+        android:text="Themes"
+        android:textColor="#2E2E2E"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/total_coins_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Coins: 0"
+        android:textSize="24sp"
+        android:fontFamily="@font/paytone"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"/>
+
+</RelativeLayout>
