@@ -17,7 +17,9 @@ class ThemeSelectionActivity : AppCompatActivity() {
         "donut" to 20,
         "fast_food" to 30,
         "fruit" to 40,
-        "gun" to 50
+        "gun" to 50,
+        "bear" to 1
+
     )
 
     @SuppressLint("MissingInflatedId")
@@ -49,6 +51,8 @@ class ThemeSelectionActivity : AppCompatActivity() {
         findViewById<LinearLayout>(R.id.fast_food_theme).setOnClickListener { setTheme("fast_food") }
         findViewById<LinearLayout>(R.id.fruit_theme).setOnClickListener { setTheme("fruit") }
         findViewById<LinearLayout>(R.id.gun_theme).setOnClickListener { setTheme("gun") }
+        findViewById<LinearLayout>(R.id.bear_theme).setOnClickListener { setTheme("bear") }
+
     }
 
     private fun setTheme(theme: String) {
@@ -90,6 +94,7 @@ class ThemeSelectionActivity : AppCompatActivity() {
             "fast_food" -> R.id.lock_icon_fast_food
             "fruit" -> R.id.lock_icon_fruit
             "gun" -> R.id.lock_icon_gun
+            "bear" -> R.id.lock_icon_bear
             else -> return
         }
 
@@ -99,6 +104,7 @@ class ThemeSelectionActivity : AppCompatActivity() {
             "fast_food" -> R.id.fast_food_price
             "fruit" -> R.id.fruit_price
             "gun" -> R.id.gun_price
+            "bear" -> R.id.bear_price
             else -> return
         }
 
@@ -121,6 +127,7 @@ class ThemeSelectionActivity : AppCompatActivity() {
             "donut" -> Intent(this, DonutHomeActivity::class.java)
             "fast_food" -> Intent(this, FastFoodHomeActivity::class.java)
             "gun" -> Intent(this, GunHomeActivity::class.java)
+            "bear" -> Intent(this, BearHomeActivity::class.java)
             else -> Intent(this, IceCreamHomeActivity::class.java)
         }
         startActivity(intent)
@@ -140,6 +147,8 @@ class ThemeSelectionActivity : AppCompatActivity() {
         setLockIconVisibility("fast_food", R.id.lock_icon_fast_food, R.id.fast_food_price)
         setLockIconVisibility("fruit", R.id.lock_icon_fruit, R.id.fruit_price)
         setLockIconVisibility("gun", R.id.lock_icon_gun, R.id.gun_price)
+        setLockIconVisibility("bear", R.id.lock_icon_bear, R.id.bear_price)
+
     }
 
     private fun setLockIconVisibility(theme: String, lockIconId: Int, priceTextId: Int) {
