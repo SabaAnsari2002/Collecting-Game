@@ -380,7 +380,115 @@
                 android:visibility="visible"/>
         </LinearLayout>
 
+        <!-- Flower Theme -->
+        <LinearLayout
+            android:id="@+id/flower_theme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/flowerbucket"
+                    android:contentDescription="Flower Theme" />
+
+                <ImageView
+                    android:id="@+id/lock_icon_flower"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/lock"
+                    android:visibility="visible"
+                    android:layout_gravity="end|bottom"
+                    />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="flower"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#000000"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/flower_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: 70 Coins"
+                android:fontFamily="@font/paytone"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:visibility="visible"/>
+        </LinearLayout>
+        <!-- Car Theme -->
+        <LinearLayout
+            android:id="@+id/car_theme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/car2"
+                    android:contentDescription="Car Theme" />
+
+                <ImageView
+                    android:id="@+id/lock_icon_car"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/lock"
+                    android:visibility="visible"
+                    android:layout_gravity="end|bottom"
+                    />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="car"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#000000"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/car_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: 80 Coins"
+                android:fontFamily="@font/paytone"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:visibility="visible"/>
+        </LinearLayout>
+
     </GridLayout>
+
     <TextView
         android:id="@+id/total_coins_text_view"
         android:layout_width="wrap_content"
