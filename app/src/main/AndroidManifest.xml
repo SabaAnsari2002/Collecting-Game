@@ -43,7 +43,12 @@
         <activity
             android:name=".BearHomeActivity"
             android:exported="true" />
-
+        <activity
+            android:name=".FlowerHomeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CarHomeActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -69,7 +74,12 @@
         <activity
             android:name=".BearGameOverActivity"
             android:exported="true" />
-
+        <activity
+            android:name=".FlowerGameOverActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CarGameOverActivity"
+            android:exported="true" />
         <activity
             android:name=".IceCreamWinActivity"
             android:exported="true" />
@@ -91,7 +101,12 @@
         <activity
             android:name=".BearWinActivity"
             android:exported="true" />
-
+        <activity
+            android:name=".FlowerWinActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CarWinActivity"
+            android:exported="true" />
         <activity
             android:name=".ThemeSelectionActivity"
             android:exported="true" />

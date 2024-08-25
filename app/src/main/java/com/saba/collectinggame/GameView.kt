@@ -41,6 +41,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private val fastfoodBucketScaleFactor = 0.2f
     private val gunBucketScaleFactor = 0.2f
     private val bearBucketScaleFactor = 0.25f
+    private val flowerBucketScaleFactor = 0.23f
+    private val carBucketScaleFactor = 0.21f
 
     private val iceCreamScaleFactor = 0.4f
     private val donutScaleFactor = 0.09f
@@ -49,6 +51,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private val fastfoodScaleFactor = 0.09f
     private val gunScaleFactor = 0.11f
     private val bearScaleFactor = 0.10f
+    private val flowerScaleFactor = 0.10f
+    private val carScaleFactor = 0.18f
 
     // Definition of bombs
     private val bombs = mutableListOf<Bomb>()
@@ -277,6 +281,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "fast_food" -> Intent(context, FastFoodWinActivity::class.java)
             "gun" -> Intent(context, GunWinActivity::class.java)
             "bear" -> Intent(context, BearWinActivity::class.java)
+            "flower" -> Intent(context, FlowerWinActivity::class.java)
+            "car" -> Intent(context, CarWinActivity::class.java)
 
             else -> Intent(context, IceCreamWinActivity::class.java)
         }
@@ -301,6 +307,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "fast_food" -> Intent(context, FastFoodGameOverActivity::class.java)
             "gun" -> Intent(context, GunGameOverActivity::class.java)
             "bear" -> Intent(context, BearGameOverActivity::class.java)
+            "flower" -> Intent(context, FlowerGameOverActivity::class.java)
+            "car" -> Intent(context, CarGameOverActivity::class.java)
 
             else -> Intent(context, IceCreamGameOverActivity::class.java)
         }
@@ -345,6 +353,8 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "fruit" -> BitmapFactory.decodeResource(resources, R.drawable.fruitbucket)
             "gun" -> BitmapFactory.decodeResource(resources, R.drawable.gunbucket)
             "bear" -> BitmapFactory.decodeResource(resources, R.drawable.bearbucket)
+            "flower" -> BitmapFactory.decodeResource(resources, R.drawable.flowerbucket)
+            "car" -> BitmapFactory.decodeResource(resources, R.drawable.carbucket)
 
             else -> BitmapFactory.decodeResource(resources, R.drawable.icecreambucket)
         }
@@ -358,6 +368,9 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "fruit" -> fruitBucketScaleFactor
             "gun" -> gunBucketScaleFactor
             "bear" -> bearBucketScaleFactor
+            "flower" -> flowerBucketScaleFactor
+            "car" -> carBucketScaleFactor
+
             else -> defaultBucketScaleFactor
         }
     }
@@ -370,6 +383,9 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "fruit" -> fruitScaleFactor
             "gun" -> gunScaleFactor
             "bear" -> bearScaleFactor
+            "flower" -> flowerScaleFactor
+            "car" -> carScaleFactor
+
             else -> iceCreamScaleFactor
         }
     }
@@ -382,6 +398,9 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "fruit" -> BitmapFactory.decodeResource(resources, R.drawable.bomb1)
             "gun" -> BitmapFactory.decodeResource(resources, R.drawable.bomb1)
             "bear" -> BitmapFactory.decodeResource(resources, R.drawable.bomb2)
+            "flower" -> BitmapFactory.decodeResource(resources, R.drawable.bomb2)
+            "car" -> BitmapFactory.decodeResource(resources, R.drawable.bomb2)
+
             else -> BitmapFactory.decodeResource(resources, R.drawable.bomb2)
         }
     }
@@ -454,6 +473,28 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 BitmapFactory.decodeResource(resources, R.drawable.bear5),
                 BitmapFactory.decodeResource(resources, R.drawable.bear6),
                 BitmapFactory.decodeResource(resources, R.drawable.bear7)
+            )
+            "flower" -> listOf(
+                BitmapFactory.decodeResource(resources, R.drawable.flower1),
+                BitmapFactory.decodeResource(resources, R.drawable.flower2),
+                BitmapFactory.decodeResource(resources, R.drawable.flower3),
+                BitmapFactory.decodeResource(resources, R.drawable.flower4),
+                BitmapFactory.decodeResource(resources, R.drawable.flower5),
+                BitmapFactory.decodeResource(resources, R.drawable.flower6),
+                BitmapFactory.decodeResource(resources, R.drawable.flower7),
+                BitmapFactory.decodeResource(resources, R.drawable.flower8),
+                BitmapFactory.decodeResource(resources, R.drawable.flower9),
+                BitmapFactory.decodeResource(resources, R.drawable.flower10),
+                BitmapFactory.decodeResource(resources, R.drawable.flower11),
+                )
+            "car" -> listOf(
+                BitmapFactory.decodeResource(resources, R.drawable.car1),
+                BitmapFactory.decodeResource(resources, R.drawable.car2),
+                BitmapFactory.decodeResource(resources, R.drawable.car3),
+                BitmapFactory.decodeResource(resources, R.drawable.car4),
+                BitmapFactory.decodeResource(resources, R.drawable.car5),
+                BitmapFactory.decodeResource(resources, R.drawable.car6),
+                BitmapFactory.decodeResource(resources, R.drawable.car7)
             )
             else -> listOf(
                 BitmapFactory.decodeResource(resources, R.drawable.ice_cream1),

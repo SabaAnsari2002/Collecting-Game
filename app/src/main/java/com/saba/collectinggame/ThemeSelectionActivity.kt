@@ -18,8 +18,9 @@ class ThemeSelectionActivity : AppCompatActivity() {
         "fast_food" to 30,
         "fruit" to 40,
         "gun" to 50,
-        "bear" to 1
-
+        "bear" to 60,
+        "flower" to 70,
+        "car" to 80
     )
 
     @SuppressLint("MissingInflatedId")
@@ -52,6 +53,8 @@ class ThemeSelectionActivity : AppCompatActivity() {
         findViewById<LinearLayout>(R.id.fruit_theme).setOnClickListener { setTheme("fruit") }
         findViewById<LinearLayout>(R.id.gun_theme).setOnClickListener { setTheme("gun") }
         findViewById<LinearLayout>(R.id.bear_theme).setOnClickListener { setTheme("bear") }
+        findViewById<LinearLayout>(R.id.flower_theme).setOnClickListener { setTheme("flower") }
+        findViewById<LinearLayout>(R.id.car_theme).setOnClickListener { setTheme("car") }
 
     }
 
@@ -95,6 +98,9 @@ class ThemeSelectionActivity : AppCompatActivity() {
             "fruit" -> R.id.lock_icon_fruit
             "gun" -> R.id.lock_icon_gun
             "bear" -> R.id.lock_icon_bear
+            "flower" -> R.id.lock_icon_flower
+            "car" -> R.id.lock_icon_car
+
             else -> return
         }
 
@@ -105,6 +111,9 @@ class ThemeSelectionActivity : AppCompatActivity() {
             "fruit" -> R.id.fruit_price
             "gun" -> R.id.gun_price
             "bear" -> R.id.bear_price
+            "flower" -> R.id.flower_price
+            "car" -> R.id.car_price
+
             else -> return
         }
 
@@ -128,6 +137,9 @@ class ThemeSelectionActivity : AppCompatActivity() {
             "fast_food" -> Intent(this, FastFoodHomeActivity::class.java)
             "gun" -> Intent(this, GunHomeActivity::class.java)
             "bear" -> Intent(this, BearHomeActivity::class.java)
+            "flower" -> Intent(this, FlowerHomeActivity::class.java)
+            "car" -> Intent(this, CarHomeActivity::class.java)
+
             else -> Intent(this, IceCreamHomeActivity::class.java)
         }
         startActivity(intent)
@@ -148,6 +160,8 @@ class ThemeSelectionActivity : AppCompatActivity() {
         setLockIconVisibility("fruit", R.id.lock_icon_fruit, R.id.fruit_price)
         setLockIconVisibility("gun", R.id.lock_icon_gun, R.id.gun_price)
         setLockIconVisibility("bear", R.id.lock_icon_bear, R.id.bear_price)
+        setLockIconVisibility("flower", R.id.lock_icon_flower, R.id.flower_price)
+        setLockIconVisibility("car", R.id.lock_icon_car, R.id.car_price)
 
     }
 
