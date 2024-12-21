@@ -20,7 +20,9 @@ class ThemeSelectionActivity : AppCompatActivity() {
         "gun" to 50,
         "bear" to 60,
         "flower" to 70,
-        "car" to 80
+        "car" to 80,
+        "christmas" to 90
+
     )
 
     @SuppressLint("MissingInflatedId")
@@ -55,6 +57,7 @@ class ThemeSelectionActivity : AppCompatActivity() {
         findViewById<LinearLayout>(R.id.bear_theme).setOnClickListener { setTheme("bear") }
         findViewById<LinearLayout>(R.id.flower_theme).setOnClickListener { setTheme("flower") }
         findViewById<LinearLayout>(R.id.car_theme).setOnClickListener { setTheme("car") }
+        findViewById<LinearLayout>(R.id.christmas_theme).setOnClickListener { setTheme("christmas") }
 
     }
 
@@ -100,6 +103,7 @@ class ThemeSelectionActivity : AppCompatActivity() {
             "bear" -> R.id.lock_icon_bear
             "flower" -> R.id.lock_icon_flower
             "car" -> R.id.lock_icon_car
+            "christmas" -> R.id.lock_icon_christmas
 
             else -> return
         }
@@ -113,6 +117,7 @@ class ThemeSelectionActivity : AppCompatActivity() {
             "bear" -> R.id.bear_price
             "flower" -> R.id.flower_price
             "car" -> R.id.car_price
+            "christmas" -> R.id.christmas_price
 
             else -> return
         }
@@ -139,6 +144,7 @@ class ThemeSelectionActivity : AppCompatActivity() {
             "bear" -> Intent(this, BearHomeActivity::class.java)
             "flower" -> Intent(this, FlowerHomeActivity::class.java)
             "car" -> Intent(this, CarHomeActivity::class.java)
+            "christmas" -> Intent(this, ChristmasHomeActivity::class.java)
 
             else -> Intent(this, IceCreamHomeActivity::class.java)
         }
@@ -162,6 +168,7 @@ class ThemeSelectionActivity : AppCompatActivity() {
         setLockIconVisibility("bear", R.id.lock_icon_bear, R.id.bear_price)
         setLockIconVisibility("flower", R.id.lock_icon_flower, R.id.flower_price)
         setLockIconVisibility("car", R.id.lock_icon_car, R.id.car_price)
+        setLockIconVisibility("christmas", R.id.lock_icon_christmas, R.id.christmas_price)
 
     }
 

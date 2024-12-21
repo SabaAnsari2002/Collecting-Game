@@ -30,6 +30,7 @@ class SplashActivity : AppCompatActivity() {
             "bear" -> R.layout.activity_splash_bear
             "flower" -> R.layout.activity_splash_flower
             "car" -> R.layout.activity_splash_car
+            "christmas" -> R.layout.activity_splash_christmas
 
             else -> R.layout.activity_splash_ice_cream
         }
@@ -54,6 +55,7 @@ class SplashActivity : AppCompatActivity() {
                 "bear" -> Intent(this, BearHomeActivity::class.java)
                 "flower" -> Intent(this, FlowerHomeActivity::class.java)
                 "car" -> Intent(this, CarHomeActivity::class.java)
+                "christmas" -> Intent(this, ChristmasHomeActivity::class.java)
 
                 else -> Intent(this, IceCreamHomeActivity::class.java)
             }
