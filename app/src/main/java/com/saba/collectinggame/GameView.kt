@@ -43,6 +43,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private val bearBucketScaleFactor = 0.25f
     private val flowerBucketScaleFactor = 0.23f
     private val carBucketScaleFactor = 0.21f
+    private val christmasBucketScaleFactor = 0.2f
 
     private val iceCreamScaleFactor = 0.4f
     private val donutScaleFactor = 0.09f
@@ -53,6 +54,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
     private val bearScaleFactor = 0.10f
     private val flowerScaleFactor = 0.10f
     private val carScaleFactor = 0.18f
+    private val christmasScaleFactor = 0.1f
 
     // Definition of bombs
     private val bombs = mutableListOf<Bomb>()
@@ -283,6 +285,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "bear" -> Intent(context, BearWinActivity::class.java)
             "flower" -> Intent(context, FlowerWinActivity::class.java)
             "car" -> Intent(context, CarWinActivity::class.java)
+            "christmas" -> Intent(context, ChristmasWinActivity::class.java)
 
             else -> Intent(context, IceCreamWinActivity::class.java)
         }
@@ -309,6 +312,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "bear" -> Intent(context, BearGameOverActivity::class.java)
             "flower" -> Intent(context, FlowerGameOverActivity::class.java)
             "car" -> Intent(context, CarGameOverActivity::class.java)
+            "christmas" -> Intent(context, ChristmasGameOverActivity::class.java)
 
             else -> Intent(context, IceCreamGameOverActivity::class.java)
         }
@@ -355,6 +359,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "bear" -> BitmapFactory.decodeResource(resources, R.drawable.bearbucket)
             "flower" -> BitmapFactory.decodeResource(resources, R.drawable.flowerbucket)
             "car" -> BitmapFactory.decodeResource(resources, R.drawable.carbucket)
+            "christmas" -> BitmapFactory.decodeResource(resources, R.drawable.christmasbucket)
 
             else -> BitmapFactory.decodeResource(resources, R.drawable.icecreambucket)
         }
@@ -370,6 +375,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "bear" -> bearBucketScaleFactor
             "flower" -> flowerBucketScaleFactor
             "car" -> carBucketScaleFactor
+            "christmas" -> christmasBucketScaleFactor
 
             else -> defaultBucketScaleFactor
         }
@@ -385,6 +391,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "bear" -> bearScaleFactor
             "flower" -> flowerScaleFactor
             "car" -> carScaleFactor
+            "christmas" -> christmasScaleFactor
 
             else -> iceCreamScaleFactor
         }
@@ -400,6 +407,7 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
             "bear" -> BitmapFactory.decodeResource(resources, R.drawable.bomb2)
             "flower" -> BitmapFactory.decodeResource(resources, R.drawable.bomb2)
             "car" -> BitmapFactory.decodeResource(resources, R.drawable.bomb2)
+            "christmas" -> BitmapFactory.decodeResource(resources, R.drawable.bomb1)
 
             else -> BitmapFactory.decodeResource(resources, R.drawable.bomb2)
         }
@@ -495,6 +503,21 @@ class GameView(context: Context, attrs: AttributeSet? = null) : View(context, at
                 BitmapFactory.decodeResource(resources, R.drawable.car5),
                 BitmapFactory.decodeResource(resources, R.drawable.car6),
                 BitmapFactory.decodeResource(resources, R.drawable.car7)
+            )
+            "christmas" -> listOf(
+                BitmapFactory.decodeResource(resources, R.drawable.christmas1),
+                BitmapFactory.decodeResource(resources, R.drawable.christmas2),
+                BitmapFactory.decodeResource(resources, R.drawable.christmas3),
+                BitmapFactory.decodeResource(resources, R.drawable.christmas4),
+                BitmapFactory.decodeResource(resources, R.drawable.christmas5),
+                BitmapFactory.decodeResource(resources, R.drawable.christmas6),
+                BitmapFactory.decodeResource(resources, R.drawable.christmas7),
+                BitmapFactory.decodeResource(resources, R.drawable.christmas8),
+                BitmapFactory.decodeResource(resources, R.drawable.christmas9),
+                BitmapFactory.decodeResource(resources, R.drawable.christmas10),
+
+
+
             )
             else -> listOf(
                 BitmapFactory.decodeResource(resources, R.drawable.ice_cream1),

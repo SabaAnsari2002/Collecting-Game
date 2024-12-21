@@ -14,6 +14,16 @@
         android:layout_marginTop="50dp"
         android:fontFamily="@font/paytone"
         android:textColor="#20AFC1" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/theme_selection_text"
+        android:layout_marginTop="30dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <GridLayout
         android:id="@+id/theme_grid"
@@ -22,7 +32,7 @@
         android:layout_below="@id/theme_selection_text"
         android:layout_marginTop="30dp"
         android:columnCount="3"
-        android:rowCount="3"
+        android:rowCount="4"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:background="@drawable/rounded_corners">
@@ -487,8 +497,63 @@
                 android:visibility="visible"/>
         </LinearLayout>
 
-    </GridLayout>
+        <!-- Christmas Theme -->
+        <LinearLayout
+            android:id="@+id/christmas_theme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:gravity="center">
 
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/christmas3"
+                    android:contentDescription="Christmas Theme" />
+
+                <ImageView
+                    android:id="@+id/lock_icon_christmas"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/lock"
+                    android:visibility="visible"
+                    android:layout_gravity="end|bottom"
+                    />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="christmas"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/paytone"
+                android:textColor="#000000"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/christmas_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: 90 Coins"
+                android:fontFamily="@font/paytone"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:visibility="visible"/>
+        </LinearLayout>
+
+    </GridLayout>
+    </LinearLayout>
+    </ScrollView>
     <TextView
         android:id="@+id/total_coins_text_view"
         android:layout_width="wrap_content"

@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/icon"
+        android:icon="@drawable/icon2"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icon"
+        android:roundIcon="@drawable/icon2"
         android:supportsRtl="true"
         android:theme="@style/Theme.CollectingGame"
         tools:targetApi="31">
@@ -50,6 +50,9 @@
             android:name=".CarHomeActivity"
             android:exported="true" />
         <activity
+            android:name=".ChristmasHomeActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
 
@@ -81,6 +84,9 @@
             android:name=".CarGameOverActivity"
             android:exported="true" />
         <activity
+            android:name=".ChristmasGameOverActivity"
+            android:exported="true" />
+        <activity
             android:name=".IceCreamWinActivity"
             android:exported="true" />
         <activity
@@ -106,6 +112,9 @@
             android:exported="true" />
         <activity
             android:name=".CarWinActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ChristmasWinActivity"
             android:exported="true" />
         <activity
             android:name=".ThemeSelectionActivity"

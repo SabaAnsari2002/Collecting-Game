@@ -65,6 +65,8 @@ class MainActivity : AppCompatActivity() {
                     "bear" -> Intent(this@MainActivity, BearHomeActivity::class.java)
                     "flower" -> Intent(this@MainActivity, FlowerHomeActivity::class.java)
                     "car" -> Intent(this@MainActivity, CarHomeActivity::class.java)
+                    "christmas" -> Intent(this@MainActivity, ChristmasHomeActivity::class.java)
+
                     else -> Intent(this@MainActivity, IceCreamHomeActivity::class.java)
                 }
                 startActivity(intent)
